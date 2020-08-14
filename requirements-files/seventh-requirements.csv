@@ -1,0 +1,8 @@
+Requirement name,Max number of AP courses that can be applied,AP Credit 1,AP Credit 2, ...
+Synthesis,12,0,N/A
+Arts,8,8,AP 2-D Art and Design,AP 3-D Art and Design,AP Art History,AP Drawing,AP Music Theory
+Humanities,8,8,AP United States History,AP Chinese Language and Culture,AP French Language and Culture,AP German Language and Culture,AP Italian Language and Culture,AP Japanese Language and Culture,AP Spanish Language and Culture,AP Spanish Literature and Culture,AP Latin
+Natural Sciences and Engineering,8,8,AP Physics C: Electricity and Magnetism,AP Physics C: Mechanics,AP Biology,AP Chemistry,AP Environmental Science
+Quantitative Reasoning,8,8,AP Calculus AB,AP Calculus BC,AP Computer Science A,AP Computer Science Principles,AP Statistics
+Social Sciences,8,8,AP Macroeconomics,AP Microeconomics
+High-Impact,4,0,N/A
