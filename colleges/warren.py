@@ -20,10 +20,11 @@ class WarrenCollege(College):
         self.pofc = pofc
         self.area_studies = area_studies
 
+        self.gen_unit_total = 0
         self.pofc_unit_total = 0
         self.area_study_unit_total = 0
-        self.gen_unit_total = 0
 
+        self.gen_credited_units = 0
         self.pofc_credited_units = 0
         self.area_study_credited_units = 0
 
@@ -73,6 +74,7 @@ class WarrenCollege(College):
                     else:
                         req.add_credit(cred.course, BASE_UNIT_QTY)
 
+
         # Select the PofCs that maximize the amount of applied credits
         best_hum_pofc = best_soc_pofc = best_sci_pofc = None
         for pofc in self.pofc:
@@ -118,6 +120,12 @@ class WarrenCollege(College):
         # Update the number of credited units (doesn't update for PofC and Area Studies)
         self.compute_credited_units()
 
+    def compute_credited_units(self):
+        # Update only non-PofC and non-AS requirements
+        for req in self.requirements:
+            if req.name != POFC and req.name != AREA_STUDY:
+                self.gen_credited_units += req.credit_units
+
     def get_pofc_unit_total(self):
         return self.pofc_unit_total
 
@@ -127,11 +135,14 @@ class WarrenCollege(College):
     def get_gen_unit_total(self):
         return self.gen_unit_total
 
-    def get_net_pofc_units(self):
-        return (self.gen_unit_total + self.pofc_unit_total) - self.pofc_credited_units
-
-    def get_net_area_study_units(self):
-        return (self.gen_unit_total + self.area_study_unit_total) - self.area_study_credited_units
+    def display_gen_results(self):
+        print(f"Non-PofC and Non-Area-Study Credits:\n")
+        for req in self.requirements:
+            if req.name != POFC and req.name != AREA_STUDY:
+                print(f"{req.name} - Applied Credits:")
+                for cred in req.credits:
+                    print(cred)
+        print()
 
     def display_pofc_hum(self):
         # Only display the PofC if any credits were actually applied
@@ -162,7 +173,7 @@ class WarrenCollege(College):
 
     def display_area_study_hum(self):
         if self.area_study_hum.credit_units > 0:
-            print(f"Humanities and Fine Arts Area Study: self {self.area_study_hum.name}")
+            print(f"Humanities and Fine Arts Area Study: {self.area_study_hum.name}")
             for cred in self.area_study_hum.credits:
                 print(cred)
         else:
@@ -189,21 +200,21 @@ class WarrenCollege(College):
         print(f"The following AP Courses were used toward 1) Humanities and Fine Arts + Social Sciences:")
         self.display_pofc_hum()
         self.display_pofc_soc()
-        hum_soc_units = pofc_total - (self.pofc_hum.credit_units + self.pofc_soc.credit_units)
+        hum_soc_units = pofc_total - (self.pofc_hum.credit_units + self.pofc_soc.credit_units) - self.gen_credited_units
         print(f"\nAfter applying AP Credit, the remaining amount of units is {hum_soc_units}\n")
 
         print(
             f"The following AP Courses were used toward 2) Humanities and Fine Arts + Math and Natural Sciences and Engineering")
         self.display_pofc_hum()
         self.display_pofc_sci()
-        hum_sci_units = pofc_total - (self.pofc_hum.credit_units + self.pofc_sci.credit_units)
+        hum_sci_units = pofc_total - (self.pofc_hum.credit_units + self.pofc_sci.credit_units) - self.gen_credited_units
         print(f"\nAfter applying AP Credit, the remaining amount of units is {hum_sci_units}\n")
 
         print(
             f"The following AP Courses were used toward 3) Social Sciences + Math and Natural Sciences and Engineering")
         self.display_pofc_soc()
         self.display_pofc_sci()
-        soc_sci_units = pofc_total - (self.pofc_soc.credit_units + self.pofc_sci.credit_units)
+        soc_sci_units = pofc_total - (self.pofc_soc.credit_units + self.pofc_sci.credit_units) - self.gen_credited_units
         print(f"\nAfter applying AP Credit, the remaining amount of units is {soc_sci_units}")
 
     def display_as_results(self):
@@ -218,15 +229,17 @@ class WarrenCollege(College):
         print(f"The following AP Courses were used toward 1) Humanities and Fine Arts:")
         self.display_area_study_hum()
 
-        print(f"The following AP Courses were used toward 2) Social Sciences:")
+        print(f"\nThe following AP Courses were used toward 2) Social Sciences:")
         self.display_area_study_soc()
 
-        rem_units = as_total - (self.area_study_hum.credit_units + self.area_study_soc.credit_units)
+        rem_units = as_total - (self.area_study_hum.credit_units + self.area_study_soc.credit_units) - self.gen_credited_units
         print(f"\nAfter applying AP Credit, the remaining amount of units is {rem_units}.")
 
     def display_results(self):
         print(f"Results for {self.name}:\n")
 
+        self.display_gen_results()
+        print()
         self.display_pofc_results()
         print()
         self.display_as_results()
