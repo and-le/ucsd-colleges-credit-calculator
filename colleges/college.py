@@ -1,0 +1,54 @@
+class College:
+
+    def __init__(self, name, requirements):
+        self.name = name
+        self.requirements = requirements
+
+        # Add up the requirement units
+        self.unit_total = 0
+        self.compute_unit_total(requirements)
+
+        # Total credited units
+        self.credited_units = 0
+
+    def __repr__(self):
+        return f"{self.name} College"
+
+    def apply_credits(self, credits):
+        pass
+
+    def compute_unit_total(self, requirements):
+        # Compute total number of units
+        self.unit_total = 0
+        for req in self.requirements:
+            self.unit_total += req.unit_total
+
+    def get_unit_total(self):
+        return self.unit_total
+
+    def compute_credited_units(self):
+        for req in self.requirements:
+            self.credited_units += req.credit_units
+
+    def get_credited_units(self):
+        return self.credited_units
+
+    def get_net_units(self):
+        return self.unit_total - self.credited_units
+
+    def display_requirements(self):
+        for r in self.requirements:
+            print(r)
+
+    def display_credited_units(self):
+        for req in self.requirements:
+            if req.credit_units > 0:
+                print(f"{req.name} - Applied Credits: {req.credits} - Credited Units: {req.credit_units}")
+
+    def display_results(self):
+        print(f"Results for {self}:")
+        print(f"{self} has a total of {self.get_unit_total()} units.\n")
+        print(f"The following AP Courses were used toward {self} requirements:")
+        self.display_credited_units()
+        print(f"\n{self.get_credited_units()} units of AP Credit were applied.")
+        print(f"\nAfter applying AP Credit, the remaining amount of units is {self.get_net_units()}.")
