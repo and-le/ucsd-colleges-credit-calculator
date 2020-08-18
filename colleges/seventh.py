@@ -12,6 +12,12 @@ class SeventhCollege(College):
         super().__init__(name, requirements)
 
     def apply_credits(self, credits):
+        """
+        Seventh College has 4 different categories of courses for which each APCredit is worth 8 units.
+        Aside from this, there are no special cases.
+        :param credits:
+        :return:
+        """
         for cred in credits:
             for req in self.requirements:
                 if cred.course in req.courses:

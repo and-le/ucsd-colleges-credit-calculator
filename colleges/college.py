@@ -1,6 +1,15 @@
 class College:
+    """
+    Base class for each UCSD college. A College contains a list of Requirements. It can take a list of APCredits
+    and return how many units were applied.
+    """
 
     def __init__(self, name, requirements):
+        """
+        The requirements for each college are loaded in from a CSV file. 
+        :param name:
+        :param requirements:
+        """
         self.name = name
         self.requirements = requirements
 
@@ -15,6 +24,12 @@ class College:
         return f"{self.name} College"
 
     def apply_credits(self, credits):
+        """
+        Determines which of the given APCredits can be applied for this college, and updates the College's
+        fields accordingly. This method must be overridden by the sub-class.
+        :param credits: List of APCredits
+        :return:
+        """
         pass
 
     def compute_unit_total(self, requirements):

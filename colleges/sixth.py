@@ -10,10 +10,17 @@ class SixthCollege(College):
         super().__init__(name, requirements)
 
     def apply_credits(self, credits):
+        """
+        Sixth College has 2 categories for which APCredits count as 8 units. In addition, its Social Sciences
+        requirement only allows 1 each of the AP Economics and Government courses to be used.
+
+        For the remainder of the requirements, the rules for Sixth don't have any special cases.
+        :param credits:
+        :return:
+        """
         for cred in credits:
             for req in self.requirements:
                 if cred.course in req.courses:
-
                     # Special cases:
 
                     # A - Social Sciences

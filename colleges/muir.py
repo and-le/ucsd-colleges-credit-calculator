@@ -19,6 +19,15 @@ class MuirCollege(College):
         self.unit_total -= 12
 
     def apply_credits(self, credits):
+        """
+        Muir has more complex rules than some of the other colleges. Each of its General Education requirements
+        allows students to choose courses from a specific focus area without mixing and matching. As a result,
+        this method determines which focus area would credit the most units and reports that area in its unit
+        counting.
+        :param credits:
+        :return:
+        """
+
         # Iterate over AP Credits
         for cred in credits:
             # Iterate over college Requirements
@@ -39,12 +48,12 @@ class MuirCollege(College):
 
                             is_subreq = True
 
-                    # If the APCredit does not fulfill a subrequirement,
-                    # then it fulfills only a Requirement
-                    if not is_subreq:
-                        req.add_credit(cred.course, BASE_UNIT_QTY)
+                        # If the APCredit does not fulfill a subrequirement,
+                        # then it fulfills only a Requirement
+                        if not is_subreq:
+                            req.add_credit(cred.course, BASE_UNIT_QTY)
 
-                        # For Requirements that have SubRequirements, choose the SubRequirement
+        # For Requirements that have SubRequirements, choose the SubRequirement
         # that maximizes the number of credits applied
 
         max_subreqs = {subreq.parent_requirement.name: None for subreq in self.subrequirements}

@@ -4,13 +4,18 @@ from .college_constants import *
 
 ROOSEVELT_8_UNIT_SCIENCE_COURSES = {AP_BIO, AP_CHEM, AP_PHYS_1, AP_PHYS_2}
 
-
 class RooseveltCollege(College):
 
     def __init__(self, name, requirements):
         super().__init__(name, requirements)
 
     def apply_credits(self, credits):
+        """
+        The rules for determining credit for Roosevelt are simpler than some of the other colleges.
+        The only special cases are for certain science courses: these ones count for 8 units rather than 4.
+        :param credits:
+        :return:
+        """
         for cred in credits:
             for req in self.requirements:
                 if cred.course in req.courses:

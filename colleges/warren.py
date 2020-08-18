@@ -46,6 +46,16 @@ class WarrenCollege(College):
                 self.gen_unit_total += r.unit_total
 
     def apply_credits(self, credits):
+        """
+        Warren has the most complex rules for determining credit. First, students have different unit requirements
+        depending on whether they must complete Programs of Concentration or Area Studies. Furthermore, there are 3
+        different categories for Programs of Concentration, and students must choose the 2 that do not overlap
+        with their major. This method considers both Programs of Concentration and Area Studies, as well as
+        all 3 combinations of Programs of Concentration choices.
+        must choose
+        :param credits:
+        :return:
+        """
         # Iterate over the AP Credits
         for cred in credits:
             # Iterate over the college reqs

@@ -7,6 +7,12 @@ class RevelleCollege(College):
         super().__init__(name, requirements)
 
     def apply_credits(self, credits):
+        """
+        Revelle College has simpler rules for determining credit than some of the other
+        colleges. The general process for applying credit is shown in this method.
+        :param credits:
+        :return:
+        """
         # Iterate over the AP Credits
         for cred in credits:
             # Iterate over the college's reqs

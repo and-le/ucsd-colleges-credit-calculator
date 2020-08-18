@@ -11,6 +11,12 @@ class MarshallCollege(College):
         super().__init__(name, requirements)
 
     def apply_credits(self, credits):
+        """
+        Marshall only credits 1 AP Physics Course. In addition, some courses count for 8 units.
+        Aside from these cases, there are no special exceptions.
+        :param credits:
+        :return:
+        """
         for cred in credits:
             for req in self.requirements:
                 if cred.course in req.courses:
