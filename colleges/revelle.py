@@ -1,5 +1,5 @@
 from .college import College
-from.college_constants import BASE_UNIT_QTY
+from.ap_constants import BASE_UNIT_QTY
 
 
 class RevelleCollege(College):
@@ -10,14 +10,14 @@ class RevelleCollege(College):
         """
         Revelle College has simpler rules for determining credit than some of the other
         colleges. The general process for applying credit is shown in this method.
-        :param credits:
+        :param credits: List of AP Credits
         :return:
         """
         # Iterate over the AP Credits
         for cred in credits:
-            # Iterate over the college's reqs
+            # Iterate over the college's requirements
             for req in self.requirements:
-                # If this AP course fulfills by a college requirement
+                # If this AP course fulfills a college requirement
                 if cred.course in req.courses:
                     req.add_credit(cred.course, BASE_UNIT_QTY)
 

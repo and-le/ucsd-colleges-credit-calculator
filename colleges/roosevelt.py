@@ -1,5 +1,5 @@
 from .college import College
-from .college_constants import *
+from .ap_constants import *
 
 
 ROOSEVELT_8_UNIT_SCIENCE_COURSES = {AP_BIO, AP_CHEM, AP_PHYS_1, AP_PHYS_2}

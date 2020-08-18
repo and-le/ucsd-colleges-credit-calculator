@@ -1,7 +1,9 @@
 # AP Course Names
 
 # Mathematics
+AP_CALC_AB = "AP Calculus AB"
 AP_CALC_BC = "AP Calculus BC"
+AP_STAT = "AP Statistics"
 AP_CSA = "AP Computer Science A"
 AP_CSP = "AP Computer Science Principles"
 
@@ -13,13 +15,12 @@ AP_PHYS_2 = "AP Physics 2: Algebra-Based"
 AP_PHYS_MECH = "AP Physics C: Mechanics"
 AP_PHYS_EM = "AP Physics C: Electricity and Magnetism"
 
-# Economics
+# Social Sciences
 AP_MACRO = "AP Macroeconomics"
 AP_MICRO = "AP Microeconomics"
-
-# Government
 AP_COMP_GOV = "AP Comparative Government and Politics"
 AP_US_GOV = "AP United States Government and Politics"
+AP_PSY = "AP Psychology"
 
 # History
 AP_WORLD_HIST = "AP World History: Modern"

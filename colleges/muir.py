@@ -1,5 +1,5 @@
 from .college import College
-from .college_constants import BASE_UNIT_QTY, LARGER_UNIT_QTY, AP_CHEM
+from .ap_constants import BASE_UNIT_QTY, LARGER_UNIT_QTY, AP_CHEM
 
 
 class MuirCollege(College):

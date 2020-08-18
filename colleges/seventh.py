@@ -1,5 +1,5 @@
 from .college import College
-from .college_constants import *
+from .ap_constants import *
 
 SEVENTH_8_UNIT_ART_COURSES = {AP_DRAW, AP_2D, AP_3D, AP_MUS, AP_ART_HIST}
 SEVENTH_8_UNIT_HUMANITIES_COURSES = {AP_US_HIST, AP_CHIN, AP_FREN, AP_GER, AP_ITA, AP_JAP, AP_SPLA, AP_SPLI}

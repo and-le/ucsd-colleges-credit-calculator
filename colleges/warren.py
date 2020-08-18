@@ -1,5 +1,5 @@
 from .college import College
-from .college_constants import *
+from .ap_constants import *
 
 # Warren College constants
 POFC = "PofC"
