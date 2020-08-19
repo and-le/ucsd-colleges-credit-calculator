@@ -17,6 +17,9 @@ class College:
         self.unit_total = 0
         self.compute_unit_total(requirements)
 
+        # Name of the subrequirement, if this college has one
+        self.subrequirement_name = None
+
         # Total credited units
         self.credited_units = 0
 
@@ -31,6 +34,19 @@ class College:
         :return:
         """
         pass
+
+    def get_requirement(self, name):
+        """
+        Returns the Requirement with the specified name. This method can be used to access a Requirement object
+        so that its credits and credited units can be verified.
+        :param: name: the name of the requirement to return
+        :return: the Requirement with the specified name; None if no such Requirement exists
+        """
+        for req in self.requirements:
+            if name == req.name:
+                return req
+
+        return None
 
     def compute_unit_total(self, requirements):
         # Compute total number of units

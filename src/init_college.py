@@ -1,6 +1,6 @@
 import csv
 
-from ..reqs.requirements import Requirement, SubRequirement, WarrenSubRequirement
+from src.requirements import Requirement, SubRequirement, WarrenSubRequirement
 from .requirement_constants import *
 from .revelle import RevelleCollege
 from .muir import MuirCollege
@@ -31,6 +31,16 @@ ROOSEVELT_REQ_FILE = "../requirement_files/roosevelt-requirements.csv"
 SIXTH_REQ_FILE = "../requirement_files/sixth-requirements.csv"
 SEVENTH_REQ_FILE = "../requirement_files/seventh-requirements.csv"
 
+# Names of certain requirements
+MUIR_SOC_REQ_NAME = "Social Sciences"
+MUIR_POLI_SUBREQ_NAME = "Political Science"
+MUIR_SCI_REQ_NAME = "Math or Natural Sciences"
+MUIR_CHEM_SUBREQ_NAME = "Chemistry"
+
+WARREN_HUM_AS_NAME = "Humanities"
+WARREN_SOC_AS_NAME = "Perspectives of Social Science"
+WARREN_MUS_AS_NAME = "Music"
+WARREN_PSY_AS_NAME = "Psychology"
 
 def init_college(name):
     """
@@ -46,7 +56,7 @@ def init_college(name):
         college = RevelleCollege(REVELLE_NAME, reqs)
     elif name == MUIR_NAME:
         reqs = load_requirements(MUIR_REQ_FILE)
-        subreqs = load_subrequirements(MUIR_REQ_FILE, reqs)
+        subreqs = load_subrequirements(MUIR_SUBREQ_FILE, reqs)
         college = MuirCollege(MUIR_NAME, reqs, subreqs)
     elif name == MARSHALL_NAME:
         reqs = load_requirements(MARSHALL_REQ_FILE)

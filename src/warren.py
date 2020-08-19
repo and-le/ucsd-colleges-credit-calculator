@@ -21,21 +21,27 @@ class WarrenCollege(College):
         self.area_studies = area_studies
 
         self.gen_unit_total = 0
-        self.pofc_unit_total = 0
-        self.area_study_unit_total = 0
-
         self.gen_credited_units = 0
-        self.pofc_credited_units = 0
-        self.area_study_credited_units = 0
 
-        # There are 3 different PofC. 2 are chosen at a time, so there are 3 different combinations.
+        self.pofc_unit_total = 0
+        # There are 3 different PofC. 2 are chosen at a time, so there are 3 different combinations:
+        # 1. HUM + SOC
+        # 2. HUM + SCI
+        # 3. SOC + SCI
         self.pofc_hum = None
         self.pofc_soc = None
         self.pofc_sci = None
+        self.pofc_hum_soc_credited_units = 0
+        self.pofc_hum_sci_credited_units = 0
+        self.pofc_soc_sci_credited_units = 0
 
+        self.area_study_unit_total = 0
         # There are 2 different AS
         self.area_study_hum = None
+        self.area_study_hum_credited_units = 0
         self.area_study_soc = None
+        self.area_study_soc_credited_units = 0
+
 
         for r in requirements:
             if r.name == POFC:
@@ -52,7 +58,6 @@ class WarrenCollege(College):
         different categories for Programs of Concentration, and students must choose the 2 that do not overlap
         with their major. This method considers both Programs of Concentration and Area Studies, as well as
         all 3 combinations of Programs of Concentration choices.
-        must choose
         :param credits:
         :return:
         """
@@ -69,8 +74,7 @@ class WarrenCollege(College):
                         for pofc in self.pofc:
                             # If the AP credit fulfills the PofC
                             if cred.course in pofc.courses:
-                                pofc.add_credit(cred.course, BASE_UNIT_QTY)
-
+                                pofc.add_credit(cred.course, FOUR_UNITS)
 
                     # If the requirement is an AS
                     elif req.name == AREA_STUDY:
@@ -78,13 +82,18 @@ class WarrenCollege(College):
                         for area_study in self.area_studies:
                             # If the AP credit fulfills the PofC
                             if cred.course in area_study.courses:
-                                area_study.add_credit(cred.course, BASE_UNIT_QTY)
+                                area_study.add_credit(cred.course, FOUR_UNITS)
 
                     # If the requirement is *not* a PofC or AS
                     else:
-                        req.add_credit(cred.course, BASE_UNIT_QTY)
+                        req.add_credit(cred.course, FOUR_UNITS)
 
+        self.compute_best_pofc()
+        self.compute_best_as()
+        # Update the number of credited units
+        self.compute_credited_units()
 
+    def compute_best_pofc(self):
         # Select the PofCs that maximize the amount of applied credits
         best_hum_pofc = best_soc_pofc = best_sci_pofc = None
         for pofc in self.pofc:
@@ -107,7 +116,10 @@ class WarrenCollege(College):
                 elif pofc.credit_units > best_sci_pofc.credit_units:
                     best_sci_pofc = pofc
 
-                    # Select the Area Studies that maximize the amount of applied credits
+        self.pofc_hum, self.pofc_soc, self.pofc_sci = best_hum_pofc, best_soc_pofc, best_sci_pofc
+
+    def compute_best_as(self):
+        # Select the Area Studies that maximize the amount of applied credits
         best_hum_area_study = best_soc_area_study = None
         for area_study in self.area_studies:
             if area_study.category == AREA_STUDY_HUM:
@@ -123,17 +135,19 @@ class WarrenCollege(College):
                 elif area_study.credit_units > best_soc_area_study.credit_units:
                     best_soc_area_study = area_study
 
-                    # Update the best choices
-        self.pofc_hum, self.pofc_soc, self.pofc_sci = best_hum_pofc, best_soc_pofc, best_sci_pofc
         self.area_study_hum, self.area_study_soc = best_hum_area_study, best_soc_area_study
 
-        # Update the number of credited units (doesn't update for PofC and Area Studies)
-        self.compute_credited_units()
-
     def compute_credited_units(self):
-        # Update only non-PofC and non-AS requirements
         for req in self.requirements:
-            if req.name != POFC and req.name != AREA_STUDY:
+            if req.name == POFC:
+                # Update the credit units for all 3 combinations of PofC
+                self.pofc_hum_soc_credited_units = self.pofc_hum.credit_units + self.pofc_soc.credit_units
+                self.pofc_hum_sci_credited_units = self.pofc_hum.credit_units + self.pofc_sci.credit_units
+                self.pofc_soc_sci_credited_units = self.pofc_soc.credit_units + self.pofc_sci.credit_units
+            elif req.name == AREA_STUDY:
+                self.area_study_hum_credited_units = self.area_study_hum.credit_units
+                self.area_study_soc_credited_units = self.area_study_soc.credit_units
+            else:
                 self.gen_credited_units += req.credit_units
 
     def get_pofc_unit_total(self):

@@ -1,6 +1,5 @@
 import unittest
-from ..requirements import Requirement
-
+from src.requirements import Requirement
 
 class RequirementTestCase(unittest.TestCase):
     def test_exceeding_units(self):

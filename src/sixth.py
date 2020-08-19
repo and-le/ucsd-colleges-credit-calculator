@@ -28,23 +28,23 @@ class SixthCollege(College):
                     # 1. Only one of {AP Macroeconomics, AP Microeconomics}
                     # 2. Only one of {AP Comparative Government and Politics, AP United States Government and Politics}
                     if \
-                            (cred.course == AP_MACRO and AP_MICRO in req.courses) or \
-                                    (cred.course == AP_MICRO and AP_MACRO in req.courses) or \
-                                    (cred.course == AP_COMP_GOV and AP_US_GOV in req.courses) or \
-                                    (cred.course == AP_US_GOV and AP_COMP_GOV in req.courses):
+                            (cred.course == AP_MACRO and AP_MICRO in req.credits) or \
+                                    (cred.course == AP_MICRO and AP_MACRO in req.credits) or \
+                                    (cred.course == AP_COMP_GOV and AP_US_GOV in req.credits) or \
+                                    (cred.course == AP_US_GOV and AP_COMP_GOV in req.credits):
                         continue
 
                     # B - Science
                     elif cred.course in SIXTH_8_UNIT_SCIENCE_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
 
                     # C - Art
                     elif cred.course in SIXTH_8_UNIT_ART_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
 
                     # Standard case : course isn't one of the above
                     else:
-                        req.add_credit(cred.course, BASE_UNIT_QTY)
+                        req.add_credit(cred.course, FOUR_UNITS)
 
         # Update the number of credited units
         self.compute_credited_units()

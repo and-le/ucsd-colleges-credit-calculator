@@ -14,6 +14,7 @@ AP_PHYS_1 = "AP Physics 1: Algebra-Based"
 AP_PHYS_2 = "AP Physics 2: Algebra-Based"
 AP_PHYS_MECH = "AP Physics C: Mechanics"
 AP_PHYS_EM = "AP Physics C: Electricity and Magnetism"
+AP_ENV = "AP Environmental Science"
 
 # Social Sciences
 AP_MACRO = "AP Macroeconomics"
@@ -45,5 +46,6 @@ AP_MUS = "AP Music Theory"
 AP_ART_HIST = "AP Art History"
 
 # Units
-BASE_UNIT_QTY = 4
-LARGER_UNIT_QTY = 8
+FOUR_UNITS = 4
+EIGHT_UNITS = 8
+TWELVE_UNITS = 12

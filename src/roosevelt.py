@@ -11,7 +11,7 @@ class RooseveltCollege(College):
 
     def apply_credits(self, credits):
         """
-        The rules for determining credit for Roosevelt are simpler than some of the other colleges.
+        The rules for determining credit for Roosevelt are simpler than some of the other src.
         The only special cases are for certain science courses: these ones count for 8 units rather than 4.
         :param credits:
         :return:
@@ -24,10 +24,10 @@ class RooseveltCollege(College):
                     if cred.course in ROOSEVELT_8_UNIT_SCIENCE_COURSES:
                         # Clear out any potential 4-unit courses
                         req.clear_credits()
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
 
                     else:
-                        req.add_credit(cred.course, BASE_UNIT_QTY)
+                        req.add_credit(cred.course, FOUR_UNITS)
 
         # Update the number of credited units
         self.compute_credited_units()

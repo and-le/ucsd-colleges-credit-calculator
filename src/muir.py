@@ -1,5 +1,7 @@
 from .college import College
-from .ap_constants import BASE_UNIT_QTY, LARGER_UNIT_QTY, AP_CHEM
+from .ap_constants import *
+
+MUIR_LANGUAGE_COURSES = {AP_CHIN, AP_GER, AP_ITA, AP_FREN, AP_SPLA, AP_SPLI, AP_JAP}
 
 
 class MuirCollege(College):
@@ -22,8 +24,8 @@ class MuirCollege(College):
         """
         Muir has more complex rules than some of the other colleges. Each of its General Education requirements
         allows students to choose courses from a specific focus area without mixing and matching. As a result,
-        this method determines which focus area would credit the most units and reports that area in its unit
-        counting.
+        this algorithm determines which focus area would credit the most units and reports that area in its unit
+        counting. The SubRequirement class is used to track each focus area.
         :param credits:
         :return:
         """
@@ -40,22 +42,40 @@ class MuirCollege(College):
                         # If the AP Credit fulfills a SubRequirement
                         if cred.course in subreq.courses:
 
-                            # Special case: AP Chemistry fulfills the entire Math or Natural Sciences Requirement
+                            # Special cases:
+                            # AP Chemistry fulfills the entire Math or Natural Sciences Requirement
                             if cred.course == AP_CHEM:
-                                subreq.add_credit(cred.course, LARGER_UNIT_QTY)
+                                # Clear out any previous Math or Science courses to reset the credited units
+                                subreq.clear_credits()
+
+                                subreq.add_credit(cred.course, TWELVE_UNITS)
+
+                            # Foreign Language exams count for 8 units
+                            elif cred.course in MUIR_LANGUAGE_COURSES:
+                                subreq.add_credit(cred.course, EIGHT_UNITS)
+
+                            # AP Latin counts for the entire foreign language sequence
+                            elif cred.course == AP_LAT:
+                                # Clear out any previous language courses to reset the credited units
+                                subreq.clear_credits()
+
+                                subreq.add_credit(cred.course, TWELVE_UNITS)
+
+                            # Standard subrequirement
                             else:
-                                subreq.add_credit(cred.course, BASE_UNIT_QTY)
+                                subreq.add_credit(cred.course, FOUR_UNITS)
 
                             is_subreq = True
 
                         # If the APCredit does not fulfill a subrequirement,
                         # then it fulfills only a Requirement
                         if not is_subreq:
-                            req.add_credit(cred.course, BASE_UNIT_QTY)
+                            req.add_credit(cred.course, FOUR_UNITS)
 
         # For Requirements that have SubRequirements, choose the SubRequirement
         # that maximizes the number of credits applied
 
+        # Maps parent requirement name to SubRequirement
         max_subreqs = {subreq.parent_requirement.name: None for subreq in self.subrequirements}
         for subreq in self.subrequirements:
             parent_name = subreq.parent_requirement.name
@@ -73,8 +93,10 @@ class MuirCollege(College):
         for req in self.requirements:
             # Only check Requirements with SubRequirements
             if max_subreqs.get(req.name):
+                # Update the Requirement
                 req.credits = max_subreqs[req.name].credits
                 req.credit_units = max_subreqs[req.name].credit_units
+                req.subrequirement_name = max_subreqs[req.name].name
 
         # Update the number of credited units
         self.compute_credited_units()

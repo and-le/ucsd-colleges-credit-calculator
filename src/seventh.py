@@ -23,15 +23,15 @@ class SeventhCollege(College):
                 if cred.course in req.courses:
 
                     if cred.course in SEVENTH_8_UNIT_ART_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
                     elif cred.course in SEVENTH_8_UNIT_HUMANITIES_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
                     elif cred.course in SEVENTH_8_UNIT_SCIENCE_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
                     elif cred.course in SEVENTH_8_UNIT_QUANT_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
                     else:
-                        req.add_credit(cred.course, BASE_UNIT_QTY)
+                        req.add_credit(cred.course, FOUR_UNITS)
 
         # Update the number of credited units
         self.compute_credited_units()

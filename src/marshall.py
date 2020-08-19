@@ -13,6 +13,8 @@ class MarshallCollege(College):
     def apply_credits(self, credits):
         """
         Marshall only credits 1 AP Physics Course. In addition, some courses count for 8 units.
+        IMPORTANT: Marshall requires each of the breadth courses to be outside of the field of study of the major.
+        The code for Marshall does not consider this when applying credit.
         Aside from these cases, there are no special exceptions.
         :param credits:
         :return:
@@ -35,12 +37,12 @@ class MarshallCollege(College):
                             (AP_PHYS_1 in req.credits or AP_PHYS_2 in req.credits or AP_PHYS_MECH in req.credits):
                         continue
 
-                    # Some AP courses count for 8 units of discplinary breadth
+                    # Some AP courses count for 8 units of discplinary breadth.
                     elif cred.course in MARSHALL_8_UNIT_BREADTH_COURSES:
-                        req.add_credit(cred.course, LARGER_UNIT_QTY)
+                        req.add_credit(cred.course, EIGHT_UNITS)
 
                     else:
-                        req.add_credit(cred.course, BASE_UNIT_QTY)
+                        req.add_credit(cred.course, FOUR_UNITS)
 
         # Update the number of credited units
         self.compute_credited_units()
