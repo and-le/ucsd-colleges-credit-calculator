@@ -1,5 +1,9 @@
 # AP Course Names
 
+# English
+AP_ENG_LANG = "AP English Language and Composition"
+AP_ENG_LIT = "AP English Literature and Composition"
+
 # Mathematics
 AP_CALC_AB = "AP Calculus AB"
 AP_CALC_BC = "AP Calculus BC"

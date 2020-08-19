@@ -37,10 +37,17 @@ MUIR_POLI_SUBREQ_NAME = "Political Science"
 MUIR_SCI_REQ_NAME = "Math or Natural Sciences"
 MUIR_CHEM_SUBREQ_NAME = "Chemistry"
 
-WARREN_HUM_AS_NAME = "Humanities"
-WARREN_SOC_AS_NAME = "Perspectives of Social Science"
 WARREN_MUS_AS_NAME = "Music"
 WARREN_PSY_AS_NAME = "Psychology"
+
+WARREN_MUS_POFC_NAME = "Music"
+WARREN_PSY_POFC_NAME = "Psychology"
+WARREN_ECON_POFC_NAME = "Economics"
+WARREN_SCI_POFC_NAME = "Science and Technology"
+WARREN_VIS_ART_POFC_NAME = "Visual Arts"
+WARREN_HIST_POFC_NAME = "History"
+WARREN_LIT_POFC_NAME = "Literature"
+
 
 def init_college(name):
     """

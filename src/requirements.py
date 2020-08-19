@@ -25,7 +25,7 @@ class Requirement:
         :param name: the name of the requirement
         :param unit_total: the total amount of units in the requirement
         :param unit_limit: the maximum amount of credit units that can be applied for this requirement
-        :param courses: the courses that this requirement accepts
+        :param courses: List of the courses that this requirement accepts
         """
         self.name = name
         self.unit_total = unit_total
@@ -104,6 +104,6 @@ class WarrenSubRequirement(SubRequirement):
         self.category = category
 
     def __repr__(self):
-        return f"{self.parent_requirement.name}:{self.name} - Category: {self.category}"
+        return f"{self.parent_requirement.name}: {self.name} - Category: {self.category}"
 
 

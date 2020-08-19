@@ -12,6 +12,25 @@ POFC_SOC = "Social Sciences"
 AREA_STUDY_HUM = "Humanities and Fine Arts"
 AREA_STUDY_SOC = "Social Sciences"
 
+# In general, Warren PofC credits count for 8 units. Some, however, only count for 4.
+WARREN_POFC_FOUR_UNIT_COURSES = {AP_MACRO, AP_MICRO, AP_ENV, AP_US_GOV, AP_COMP_GOV, AP_LAT,
+                                 AP_PHYS_MECH, AP_PHYS_EM, AP_PSY}
+
+# There is a 12-unit limit on the amount of credit units that can be applied to PofC.
+# Some PofC categories credit 8 units for each AP Exam. If students have 2 or more
+# qualifying credits for these PofC, then the maximum number of units they can earn is 12.
+WARREN_POFC_VIS_ARTS_COURSES = {AP_DRAW, AP_2D, AP_3D, AP_ART_HIST}
+WARREN_POFC_HIST_COURSES = {AP_WORLD_HIST, AP_US_HIST, AP_EURO_HIST}
+# Since Foreign Language credits are a subset of Literature credits, Literature credits will always take
+# precedence when determining which Program of Concentration yields the most units.
+WARREN_POFC_LIT_COURSES = {AP_ENG_LANG, AP_ENG_LIT, AP_LAT, AP_SPLA, AP_SPLI, AP_GER, AP_ITA, AP_FREN, AP_CHEM, AP_JAP}
+WARREN_POFC_LANG_COURSES = {AP_SPLA, AP_SPLI, AP_GER, AP_ITA, AP_FREN, AP_CHEM, AP_JAP}
+
+WARREN_VIS_ART_POFC_NAME = "Visual Arts"
+WARREN_HIST_POFC_NAME = "History"
+WARREN_LIT_POFC_NAME = "Literature"
+WARREN_LANG_POFC_NAME = "Foreign Language and Culture"
+
 
 class WarrenCollege(College):
 
@@ -74,7 +93,42 @@ class WarrenCollege(College):
                         for pofc in self.pofc:
                             # If the AP credit fulfills the PofC
                             if cred.course in pofc.courses:
-                                pofc.add_credit(cred.course, FOUR_UNITS)
+
+                                if cred.course in WARREN_POFC_FOUR_UNIT_COURSES:
+                                    pofc.add_credit(cred.course, FOUR_UNITS)
+
+                                else:
+                                    # If a course belongs to a PofC for which there are multiple 8-unit credits
+                                    # and the current PofC is such a PofC
+                                    if pofc.name == WARREN_VIS_ART_POFC_NAME and cred.course in WARREN_POFC_VIS_ARTS_COURSES:
+                                        # If a credit was already applied
+                                        if pofc.credits:
+                                            # Add 4 units to meet the unit limit
+                                            pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            pofc.add_credit(cred.course, EIGHT_UNITS)
+
+                                    elif pofc.name == WARREN_HIST_POFC_NAME and cred.course in WARREN_POFC_HIST_COURSES:
+                                        if pofc.credits:
+                                            pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            pofc.add_credit(cred.course, EIGHT_UNITS)
+
+                                    elif pofc.name == WARREN_LIT_POFC_NAME and cred.course in WARREN_POFC_LIT_COURSES:
+                                        if pofc.credits:
+                                            pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            pofc.add_credit(cred.course, EIGHT_UNITS)
+
+                                    elif pofc.name == WARREN_LANG_POFC_NAME and cred.course in WARREN_POFC_LANG_COURSES:
+                                        if pofc.credits:
+                                            pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            pofc.add_credit(cred.course, EIGHT_UNITS)
+
+                                    # Course doesn't belong to a PofC for which there are multiple 8-unit credits
+                                    else:
+                                        pofc.add_credit(cred.course, EIGHT_UNITS)
 
                     # If the requirement is an AS
                     elif req.name == AREA_STUDY:
@@ -90,6 +144,7 @@ class WarrenCollege(College):
 
         self.compute_best_pofc()
         self.compute_best_as()
+
         # Update the number of credited units
         self.compute_credited_units()
 
@@ -136,6 +191,8 @@ class WarrenCollege(College):
                     best_soc_area_study = area_study
 
         self.area_study_hum, self.area_study_soc = best_hum_area_study, best_soc_area_study
+        self.area_study_hum.credit_units = best_hum_area_study.credit_units
+        self.area_study_soc.credit_units = best_soc_area_study.credit_units
 
     def compute_credited_units(self):
         for req in self.requirements:
@@ -150,6 +207,18 @@ class WarrenCollege(College):
             else:
                 self.gen_credited_units += req.credit_units
 
+    def get_pofc(self, name):
+        """
+        Returns the PofC Requirement with the given name.
+        :param: name: the name of the PofC to get
+        :return: the PofC Requirement with the given name; None if no such PofC exists.
+        """
+        for pofc in self.pofc:
+            if name == pofc.name:
+                return pofc
+
+        return None
+
     def get_pofc_unit_total(self):
         return self.pofc_unit_total
 
@@ -158,6 +227,26 @@ class WarrenCollege(College):
 
     def get_gen_unit_total(self):
         return self.gen_unit_total
+
+    # Warren College has several different unit totals. Conseuqently, methods
+    # that report a singular unit total don't make sense for Warren.
+
+    def compute_unit_total(self, requirements):
+        """
+        Not implemented, but super-class constructor calls this method, so a NotImplementedError cannot be raised
+        :param requirements:
+        :return:
+        """
+        pass
+
+    def get_unit_total(self):
+        raise NotImplementedError()
+
+    def get_credited_units(self):
+        raise NotImplementedError()
+
+    def get_net_units(self):
+        raise NotImplementedError()
 
     def display_gen_results(self):
         print(f"Non-PofC and Non-Area-Study Credits:\n")
