@@ -1,1 +1,1 @@
-web: gunicorn calculate_credits:application --log-file -
+web: gunicorn app.calculate_credits:main --log-file -
