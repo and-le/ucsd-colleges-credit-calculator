@@ -31,9 +31,10 @@ app = Flask(__name__)
 
 @app.route("/")
 def main():
-    credits = ["AP Calculus AB", "AP Psychology"]
-    results = calculate_credits(credits)
-    return results[0]
+    # credits = ["AP Calculus AB", "AP Psychology"]
+    # results = calculate_credits(credits)
+    # return results[0]
+    return "Hello World"
 
 
 if __name__ == "__main__":
