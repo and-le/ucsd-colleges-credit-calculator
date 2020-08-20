@@ -330,7 +330,7 @@ class WarrenCollege(College):
         soc_sci_units = pofc_total - (self.pofc_soc.credit_units + self.pofc_sci.credit_units) - self.gen_credited_units
         print(f"\nAfter applying AP Credit, the remaining amount of units is {soc_sci_units}")
 
-    def display_as_results(self):
+    def display_area_study_results(self):
         print(f"Engineering majors must complete Area Studies (AS):")
         as_total = self.get_area_study_unit_total() + self.get_gen_unit_total()
         print(f"{self} has a total of {as_total} units if your major requires Area Studies.\n")
@@ -350,9 +350,121 @@ class WarrenCollege(College):
 
     def display_results(self):
         print(f"Results for {self.name}:\n")
-
         self.display_gen_results()
         print()
         self.display_pofc_results()
         print()
-        self.display_as_results()
+        self.display_area_study_results()
+
+
+    def get_gen_results_str(self):
+        gen_results_str = ""
+        gen_results_str += f"Non-PofC and Non-Area-Study Credits:\n"
+        for req in self.requirements:
+            if req.name != POFC and req.name != AREA_STUDY:
+                if req.credit_units > 0:
+                    gen_results_str += f"{req.name} - {req.credits} - Credited Units: {req.credit_units}\n"
+        return gen_results_str
+
+    def get_pofc_hum_str(self):
+        pofc_hum_str = ""
+        if self.pofc_hum.credit_units > 0:
+            pofc_hum_str += f"{self.pofc_hum.name} PofC: {self.pofc_hum.credits} - Credited Units: {self.pofc_hum.credit_units}\n"
+        else:
+            pofc_hum_str += f"Humanities and Fine Arts PofC: No Credits Applied\n"
+
+        return pofc_hum_str
+
+    def get_pofc_soc_str(self):
+        pofc_soc_str = ""
+        if self.pofc_soc.credit_units > 0:
+            pofc_soc_str += f"{self.pofc_soc.name} PofC: {self.pofc_soc.credits} - Credited Units: {self.pofc_soc.credit_units}\n"
+        else:
+            pofc_soc_str += f"Social Sciences PofC: No Credits Applied\n"
+        return pofc_soc_str
+
+    def get_pofc_sci_str(self):
+        pofc_sci_str = ""
+        if self.pofc_sci.credit_units > 0:
+            pofc_sci_str += f"{self.pofc_sci.name} PofC: {self.pofc_sci.credits} - Credited Units: {self.pofc_sci.credit_units}\n"
+        else:
+            pofc_sci_str += f"Math, Natural Sciences and Engineering PofC: No Credits Applied\n"
+        return pofc_sci_str
+
+    def get_pofc_results_str(self):
+        pofc_results_str = ""
+        pofc_results_str += f"Non-engineering majors must complete Programs of Concentration (PofC).\n"
+        pofc_total = self.get_pofc_unit_total() + self.get_gen_unit_total()
+        pofc_results_str += f"{self} has a total of {pofc_total} units if your major requires PofC. "
+        pofc_results_str += f"There are 3 different combinations of PofC:\n"
+
+        pofc_results_str += f"1) Humanities and Fine Arts + Social Sciences\n"
+        pofc_results_str += f"2) Humanities and Fine Arts + Math, Natural Sciences, Engineering\n"
+        pofc_results_str += f"3) Social Sciences + Math, Natural Sciences, and Engineering\n\n"
+
+        pofc_results_str += f"The following AP Courses were used toward Humanities and Fine Arts:\n"
+        pofc_results_str += self.get_pofc_hum_str()
+        pofc_results_str += "\n"
+        pofc_results_str += f"The following AP Courses were used toward Social Sciences:\n"
+        pofc_results_str += self.get_pofc_soc_str()
+        pofc_results_str += "\n"
+        pofc_results_str += f"The following AP Courses were used toward Math, Natural Sciences, and Engineering:\n"
+        pofc_results_str += self.get_pofc_sci_str()
+
+        hum_soc_units = pofc_total - (self.pofc_hum.credit_units + self.pofc_soc.credit_units) - self.gen_credited_units
+        hum_sci_units = pofc_total - (self.pofc_hum.credit_units + self.pofc_sci.credit_units) - self.gen_credited_units
+        soc_sci_units = pofc_total - (self.pofc_soc.credit_units + self.pofc_sci.credit_units) - self.gen_credited_units
+        pofc_results_str += "\n"
+        pofc_results_str += f"After applying AP Credit for choice 1), the remaining amount of units is {hum_soc_units}\n"
+        pofc_results_str += f"After applying AP Credit for choice 2), the remaining amount of units is {hum_sci_units}\n"
+        pofc_results_str += f"After applying AP Credit for choice 3), the remaining amount of units is {soc_sci_units}"
+
+        return pofc_results_str
+
+
+    def get_area_study_hum_str(self):
+        as_hum_str = ""
+        if self.area_study_hum.credit_units > 0:
+            as_hum_str += f"{self.area_study_hum.name} Area Study: {self.area_study_hum.credits} - Credited Units: {self.area_study_hum.credit_units}\n"
+        else:
+            as_hum_str += f"Humanities and Fine Arts Area Study: No Credits Applied\n"
+        return as_hum_str
+
+    def get_area_study_soc_str(self):
+        as_soc_str= ""
+        if self.area_study_soc.credit_units > 0:
+            as_soc_str += f"{self.area_study_soc.name} Area Study: {self.area_study_soc.credits} - Credited Units: {self.area_study_soc.credit_units}\n"
+        else:
+            as_soc_str += f"Social Sciences Area Study: No Credits Applied\n"
+        return as_soc_str
+
+    def get_area_study_results_str(self):
+        as_results_str = ""
+        as_results_str += f"Engineering majors must complete Area Studies (AS):\n"
+        as_total = self.get_area_study_unit_total() + self.get_gen_unit_total()
+        as_results_str += f"{self} has a total of {as_total} units if your major requires Area Studies.\n"
+
+        as_results_str += f"There are 2 Area Studies: 1) Humanities and Fine Arts and 2) Social Sciences\n\n"
+
+        as_results_str += f"The following AP Courses were used toward Humanities and Fine Arts:\n"
+        as_results_str += self.get_area_study_hum_str()
+
+        as_results_str += f"\nThe following AP Courses were used toward Social Sciences:\n"
+        as_results_str += self.get_area_study_soc_str()
+
+        rem_units = as_total - (
+                    self.area_study_hum.credit_units + self.area_study_soc.credit_units) - self.gen_credited_units
+        as_results_str += f"\nAfter applying AP Credit, the remaining amount of units is {rem_units}."
+
+        return as_results_str
+
+
+    def get_results_str(self):
+        results_str = ""
+        results_str += f"Results for {self.name} College:\n"
+        results_str += self.get_gen_results_str()
+        results_str += "\n"
+        results_str += self.get_pofc_results_str()
+        results_str += "\n\n"
+        results_str += self.get_area_study_results_str()
+        return results_str

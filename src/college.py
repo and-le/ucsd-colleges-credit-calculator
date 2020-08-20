@@ -83,3 +83,21 @@ class College:
         self.display_credited_units()
         print(f"\n{self.get_credited_units()} units of AP Credit were applied.")
         print(f"\nAfter applying AP Credit, the remaining amount of units is {self.get_net_units()}.")
+
+    def get_credited_units_str(self):
+        credited_units_str = ""
+        for req in self.requirements:
+            if req.credit_units > 0:
+                credited_units_str += f"{req.name} - {req.credits} - Credited Units: {req.credit_units}\n"
+
+        return credited_units_str
+
+    def get_results_str(self):
+        result_str = ""
+        result_str += f"Results for {self}:\n"
+        result_str += f"{self} has a total of {self.get_unit_total()} units.\n"
+        result_str += f"The following AP Courses were used toward {self} requirements:\n"
+        result_str += self.get_credited_units_str()
+        result_str += f"\n{self.get_credited_units()} units of AP Credit were applied."
+        result_str += f"\nAfter applying AP Credit, the remaining amount of units is {self.get_net_units()}."
+        return result_str

@@ -19,17 +19,19 @@ ROOSEVELT_NAME = "Roosevelt"
 SIXTH_NAME = "Sixth"
 SEVENTH_NAME = "Seventh"
 
+COLLEGE_NAMES = [REVELLE_NAME, MUIR_NAME, MARSHALL_NAME, WARREN_NAME, ROOSEVELT_NAME, SIXTH_NAME, SEVENTH_NAME]
+
 # Paths to college requirement files
-REVELLE_REQ_FILE = "../requirement_files/revelle-requirements.csv"
-MUIR_REQ_FILE = "../requirement_files/muir-requirements.csv"
-MUIR_SUBREQ_FILE = "../requirement_files/muir-subrequirements.csv"
-MARSHALL_REQ_FILE = "../requirement_files/marshall-requirements.csv"
-WARREN_REQ_FILE = "../requirement_files/warren-requirements.csv"
-WARREN_POFC_FILE = "../requirement_files/warren-programs-of-concentration.csv"
-WARREN_AS_FILE = "../requirement_files/warren-area-studies.csv"
-ROOSEVELT_REQ_FILE = "../requirement_files/roosevelt-requirements.csv"
-SIXTH_REQ_FILE = "../requirement_files/sixth-requirements.csv"
-SEVENTH_REQ_FILE = "../requirement_files/seventh-requirements.csv"
+REVELLE_REQ_FILE = "requirement_files/revelle-requirements.csv"
+MUIR_REQ_FILE = "requirement_files/muir-requirements.csv"
+MUIR_SUBREQ_FILE = "requirement_files/muir-subrequirements.csv"
+MARSHALL_REQ_FILE = "requirement_files/marshall-requirements.csv"
+WARREN_REQ_FILE = "requirement_files/warren-requirements.csv"
+WARREN_POFC_FILE = "requirement_files/warren-programs-of-concentration.csv"
+WARREN_AS_FILE = "requirement_files/warren-area-studies.csv"
+ROOSEVELT_REQ_FILE = "requirement_files/roosevelt-requirements.csv"
+SIXTH_REQ_FILE = "requirement_files/sixth-requirements.csv"
+SEVENTH_REQ_FILE = "requirement_files/seventh-requirements.csv"
 
 # Names of certain requirements
 MUIR_SOC_REQ_NAME = "Social Sciences"
@@ -84,6 +86,15 @@ def init_college(name):
         college = SeventhCollege(SEVENTH_NAME, reqs)
 
     return college
+
+
+def init_colleges():
+    """
+    Convenience method for initializing all colleges. Returns a List of College objects.
+    :return: a List of College objects.
+    """
+    colleges = [init_college(name) for name in COLLEGE_NAMES]
+    return colleges
 
 
 def load_requirements(file):
