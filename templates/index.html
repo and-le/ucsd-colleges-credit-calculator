@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UCSD AP Credit Calculator</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<h1>UCSD AP Credit Calculator</h1>
+<br>
+
+<!-- Check boxes for each AP Course -->
+<p><b>AP Exam:</b></p>
+
+<div>
+    <input type="checkbox" id="2d" name="AP 2-D Art and Design">
+    <label for="2d">2-D Art And Design</label>
+</div>
+
+<div>
+    <input type="checkbox" id="3d" name="AP 3-D Art and Design">
+    <label for="3d">3-D Art And Design</label>
+</div>
+
+<div>
+    <input type="checkbox" id="art" name="AP Art History">
+    <label for="art">Art History</label>
+</div>
+
+<div>
+    <input type="checkbox" id="bio" name="AP Biology">
+    <label for="bio">Biology</label>
+</div>
+
+<div>
+    <input type="checkbox" id="calcab" name="AP Calculus AB">
+    <label for="calcab">Calculus AB</label>
+</div>
+
+<div>
+    <input type="checkbox" id="calcbc" name="AP Calculus BC">
+    <label for="calcbc">Calculus BC</label>
+</div>
+
+<div>
+    <input type="checkbox" id="chem" name="AP Chemistry">
+    <label for="chem">Chemistry</label>
+</div>
+
+<div>
+    <input type="checkbox" id="chin" name="AP Chinese Language and Culture">
+    <label for="chin">Chinese Language and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="csa" name="AP Computer Science A">
+    <label for="csa">Computer Science A</label>
+</div>
+
+<div>
+    <input type="checkbox" id="csp" name="AP Computer Science Principles">
+    <label for="csp">Computer Science Principles</label>
+</div>
+
+<div>
+    <input type="checkbox" id="englang" name="AP English Language and Composition">
+    <label for="englang">English Language and Composition</label>
+</div>
+
+<div>
+    <input type="checkbox" id="englit" name="AP English Literature and Composition">
+    <label for="englit">English Literature and Composition</label>
+</div>
+
+<div>
+    <input type="checkbox" id="env" name="AP Environmental Science">
+    <label for="env">Environmental Science</label>
+</div>
+
+<div>
+    <input type="checkbox" id="euro" name="AP European History">
+    <label for="euro">European History</label>
+</div>
+
+<div>
+    <input type="checkbox" id="fren" name="AP French Language and Culture">
+    <label for="fren">French Language and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="ger" name="AP German Language and Culture">
+    <label for="ger">German Language and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="hum_geo" name="AP Human Geography">
+    <label for="hum_geo">Human Geography</label>
+</div>
+
+<div>
+    <input type="checkbox" id="ita" name="AP Italian Language and Culture">
+    <label for="ita">Italian Language and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="jap" name="AP Japanese Language and Culture">
+    <label for="jap">Japanese Language and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="lat" name="AP Latin">
+    <label for="lat">Latin</label>
+</div>
+
+<div>
+    <input type="checkbox" id="macr" name="AP Macroeconomics">
+    <label for="macr">Macroeconomics</label>
+</div>
+
+<div>
+    <input type="checkbox" id="micr" name="AP Microeconomics">
+    <label for="micr">Microeconomics</label>
+</div>
+
+<div>
+    <input type="checkbox" id="mus" name="AP Music Theory">
+    <label for="mus">Music Theory</label>
+</div>
+
+<div>
+    <input type="checkbox" id="phys1" name="AP Physics 1: Algebra-Based">
+    <label for="phys1">Physics 1: Algebra-Based</label>
+</div>
+
+<div>
+    <input type="checkbox" id="phys2" name="AP Physics 2: Algebra-Based">
+    <label for="phys2">Physics 2: Algebra-Based</label>
+</div>
+
+<div>
+    <input type="checkbox" id="phys_em" name="AP Physics C: Electricity and Magnestism">
+    <label for="phys_em">Physics C: Electricity and Magnestism</label>
+</div>
+
+<div>
+    <input type="checkbox" id="phys_mech" name="AP Physics C: Mechanics">
+    <label for="phys_mech">Physics C: Mechanics</label>
+</div>
+
+<div>
+    <input type="checkbox" id="psy" name="AP Psychology">
+    <label for="psy">Psychology</label>
+</div>
+
+<div>
+    <input type="checkbox" id="research" name="AP Research">
+    <label for="research">Research</label>
+</div>
+
+<div>
+    <input type="checkbox" id="seminar" name="AP Seminar">
+    <label for="seminar">Seminar</label>
+</div>
+
+<div>
+    <input type="checkbox" id="spla" name="AP Spanish Language and Culture">
+    <label for="spla">Spanish Language and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="spli" name="AP Spanish Literature and Culture">
+    <label for="spli">Spanish Literature and Culture</label>
+</div>
+
+<div>
+    <input type="checkbox" id="stat" name="AP Statistics">
+    <label for="stat">Statistics</label>
+</div>
+
+<div>
+    <input type="checkbox" id="us_gov" name="AP United States Government and Politics">
+    <label for="us_gov">United States Government and Politics</label>
+</div>
+
+<div>
+    <input type="checkbox" id="us_hist" name="AP United States History">
+    <label for="us_hist">United States History</label>
+</div>
+
+<div>
+    <input type="checkbox" id="world_hist" name="AP World History: Modern">
+    <label for="world_hist">World History: Modern</label>
+</div>
+
+<!-- End of AP courses -->
+
+<br>
+
+<button id="click">Calculate credits</button>
+
+<div id="revelle">Revelle College</div>
+<br>
+<div id="muir">Muir College</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $('#click').click( function () {
+        // Get all the check boxes on the page
+        const choices = document.getElementsByTagName("input");
+        // Add the checked courses to the array
+        let courses = [];
+        for (i = 0; i < choices.length; i++) {
+            if (choices[i].checked) {
+                courses.push(choices[i].name)
+            }
+        }
+        console.log(courses);
+
+        // Request the results of applying credit
+         $.ajax({
+             type: 'GET',
+             data: {"courses": courses},
+             url: '/data',
+            success: function (response) {
+                const results = response.results;
+                console.log(results)
+            }
+         }
+        );
+
+    }
+    );
+
+
+
+</script>
+
+</body>
+</html>
