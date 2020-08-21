@@ -195,46 +195,58 @@
 
 <!-- End of AP courses -->
 
+<!-- College results -->
 <br>
 
 <button id="click">Calculate credits</button>
 
-<div id="revelle">Revelle College</div>
+<div id="revelle" class="college">Revelle College</div>
 <br>
-<div id="muir">Muir College</div>
+<div id="muir" class="college">Muir College</div>
+<br>
+<div id="marshall" class="college">Marshall College</div>
+<br>
+<div id="warren" class="college">Warren College</div>
+<br>
+<div id="roosevelt" class="college">Roosevelt College</div>
+<br>
+<div id="sixth" class="college">Sixth College</div>
+<br>
+<div id="seventh" class="college">Seventh College</div>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $('#click').click( function () {
         // Get all the check boxes on the page
-        const choices = document.getElementsByTagName("input");
+        const checkBoxes = document.getElementsByTagName("input");
         // Add the checked courses to the array
         let courses = [];
-        for (i = 0; i < choices.length; i++) {
-            if (choices[i].checked) {
-                courses.push(choices[i].name)
+        for (i = 0; i < checkBoxes.length; i++) {
+            if (checkBoxes[i].checked) {
+                courses.push(checkBoxes[i].name)
             }
         }
-        console.log(courses);
 
-        // Request the results of applying credit
+        const collegeNames = ["revelle", "muir", "marshall", "warren", "roosevelt", "sixth", "seventh"];
+        // Request the results of applying the AP courses as credit
          $.ajax({
              type: 'GET',
              data: {"courses": courses},
              url: '/data',
-            success: function (response) {
+             success: function (response) {
                 const results = response.results;
-                console.log(results)
+                console.log(results[0]);
+                // Display the results for each college
+                for (i = 0; i < results.length; i++) {
+                    collegeId = "#".concat(collegeNames[i]);
+                    $(collegeId).text(results[i])
+                }
             }
          }
-        );
-
+         ); // end query
     }
-    );
-
-
-
+    ); // end event handler
 </script>
 
 </body>

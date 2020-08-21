@@ -1,8 +1,5 @@
-from flask import Flask, render_template, request, jsonify
-
-from src.requirements import APCredit
 from src.init_college import init_colleges
-
+from src.requirements import APCredit
 
 def calculate_credits(courses):
     """
@@ -28,24 +25,11 @@ def calculate_credits(courses):
     return results
 
 
-app = Flask(__name__)
-
-@app.route("/")
 def main():
-
-    # results = calculate_credits(credits)
-    # # Return the results as a string
-    # return "^".join(results)
-
-    return render_template("index.html")
-
-
-@app.route('/data')
-def data():
-    courses = request.args.getlist("courses[]")
+    courses = ["AP Calculus AB", "AP Psychology"]
     results = calculate_credits(courses)
-    data = {"results": results}
-    return jsonify(data)
+    print(results[0])
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    main()
