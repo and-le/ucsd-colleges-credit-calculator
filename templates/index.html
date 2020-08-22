@@ -7,241 +7,590 @@
 </head>
 <body>
 
-<h1>UCSD AP Credit Calculator</h1>
+<h1 class="header">UCSD AP Credit Calculator</h1>
+
+<h2 class="instructions">How to Use This Calculator</h2>
+
+<p id="instructions_paragraph">
+    1. Select the AP courses that you have completed and/or plan to complete.
+    <br>
+    2. Click the "Calculate Credits" button.
+</p>
+
 <br>
 
+
+<!-- Header consisting of AP Exam Name, AP Score -->
+<div id="ap_exam_header">
+    <div id="exam_name_header">
+        AP Exam
+    </div>
+
+    <div id="exam_score_header">
+        Score
+    </div>
+</div>
+
 <!-- Check boxes for each AP Course -->
-<p><b>AP Exam:</b></p>
+ <div class="exam">
+    <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="2d" name="AP 2-D Art and Design"
+               onclick="getElementById('2d_score').focus()">
+        <label for="2d">2-D Art And Design</label>
+    </div>
 
-<div>
-    <input type="checkbox" id="2d" name="AP 2-D Art and Design">
-    <label for="2d">2-D Art And Design</label>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="2d_score" name="2d_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="3d" name="AP 3-D Art and Design">
-    <label for="3d">3-D Art And Design</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="3d" name="AP 3-D Art and Design"
+               onclick="getElementById('3d_score').focus()">
+        <label for="3d">3-D Art And Design</label>
+    </div>
+
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="3d_score" name="3d_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="art" name="AP Art History">
-    <label for="art">Art History</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="art" name="AP Art History"
+               onclick="getElementById('art_score').focus()">
+        <label for="art">Art History</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="art_score" name="art_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="bio" name="AP Biology">
-    <label for="bio">Biology</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="bio" name="AP Biology"
+               onclick="getElementById('bio_score').focus()">
+        <label for="bio">Biology</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="bio_score" name="bio_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="calcab" name="AP Calculus AB">
-    <label for="calcab">Calculus AB</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="calcab" name="AP Calculus AB"
+               onclick="getElementById('calcab_score').focus()">
+        <label for="calcab">Calculus AB</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="calcab_score" name="calcab_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="calcbc" name="AP Calculus BC">
-    <label for="calcbc">Calculus BC</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="calcbc" name="AP Calculus BC"
+               onclick="getElementById('calcbc_score').focus()">
+        <label for="calcbc">Calculus BC</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="calcbc_score" name="calcbc_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="chem" name="AP Chemistry">
-    <label for="chem">Chemistry</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="chem" name="AP Chemistry"
+               onclick="getElementById('chem_score').focus()">
+        <label for="chem">Chemistry</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="chem_score" name="chem_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="chin" name="AP Chinese Language and Culture">
-    <label for="chin">Chinese Language and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="chin" name="AP Chinese Language and Culture"
+               onclick="getElementById('chin_score').focus()">
+        <label for="chin">Chinese Language and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="chin_score" name="chin_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="csa" name="AP Computer Science A">
-    <label for="csa">Computer Science A</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="comp_gov" name="AP Comparative Government and Politics"
+               onclick="getElementById('comp_gov_score').focus()">
+        <label for="comp_gov">Comparative Government and Politics</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="comp_gov_score" name="comp_gov_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="csp" name="AP Computer Science Principles">
-    <label for="csp">Computer Science Principles</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="csa" name="AP Computer Science A"
+               onclick="getElementById('csa_score').focus()">
+        <label for="csa">Computer Science A</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="csa_score" name="csa_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="englang" name="AP English Language and Composition">
-    <label for="englang">English Language and Composition</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="csp" name="AP Computer Science Principles"
+               onclick="getElementById('csp_score').focus()">
+        <label for="csp">Computer Science Principles</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="csp_score" name="csp_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="englit" name="AP English Literature and Composition">
-    <label for="englit">English Literature and Composition</label>
+<br>
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="draw" name="AP Drawing"
+               onclick="getElementById('draw_score').focus()">
+        <label for="draw">Drawing</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="draw_score" name="draw_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="env" name="AP Environmental Science">
-    <label for="env">Environmental Science</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="englang" name="AP English Language and Composition"
+               onclick="getElementById('englang_score').focus()">
+        <label for="englang">English Language and Composition</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="englang_score" name="englang_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="euro" name="AP European History">
-    <label for="euro">European History</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="englit" name="AP English Literature and Composition"
+               onclick="getElementById('englit_score').focus()">
+        <label for="englit">English Literature and Composition</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="englit_score" name="englit_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="fren" name="AP French Language and Culture">
-    <label for="fren">French Language and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="env" name="AP Environmental Science"
+               onclick="getElementById('env_score').focus()">
+        <label for="env">Environmental Science</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="env_score" name="env_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="ger" name="AP German Language and Culture">
-    <label for="ger">German Language and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="euro" name="AP European History"
+               onclick="getElementById('euro_score').focus()">
+        <label for="euro">European History</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="euro_score" name="euro_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="hum_geo" name="AP Human Geography">
-    <label for="hum_geo">Human Geography</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="fren" name="AP French Language and Culture"
+               onclick="getElementById('fren_score').focus()">
+        <label for="fren">French Language and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="fren_score" name="fren_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="ita" name="AP Italian Language and Culture">
-    <label for="ita">Italian Language and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="ger" name="AP German Language and Culture"
+               onclick="getElementById('ger_score').focus()">
+        <label for="ger">German Language and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="ger_score" name="ger_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="jap" name="AP Japanese Language and Culture">
-    <label for="jap">Japanese Language and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="hum" name="AP Human Geography"
+               onclick="getElementById('hum_score').focus()">
+        <label for="hum">Human Geography</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="hum_score" name="hum_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="lat" name="AP Latin">
-    <label for="lat">Latin</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="ita" name="AP Italian Language and Culture"
+               onclick="getElementById('ita_score').focus()">
+        <label for="ita">Italian Language and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="ita_score" name="ita_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="macr" name="AP Macroeconomics">
-    <label for="macr">Macroeconomics</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="jap" name="AP Japanese Language and Culture"
+               onclick="getElementById('jap_score').focus()">
+        <label for="jap">Japanese Language and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="jap_score" name="jap_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="micr" name="AP Microeconomics">
-    <label for="micr">Microeconomics</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="lat" name="AP Latin"
+               onclick="getElementById('lat_score').focus()">
+        <label for="lat">Latin</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="lat_score" name="lat_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="mus" name="AP Music Theory">
-    <label for="mus">Music Theory</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="mac" name="AP Macroeconomics"
+               onclick="getElementById('mac_score').focus()">
+        <label for="mac">Macroeconomics</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="mac_score" name="mac_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="phys1" name="AP Physics 1: Algebra-Based">
-    <label for="phys1">Physics 1: Algebra-Based</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="mic" name="AP Microeconomics"
+               onclick="getElementById('mic_score').focus()">
+        <label for="mic">Microeconomics</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="mic_score" name="mic_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="phys2" name="AP Physics 2: Algebra-Based">
-    <label for="phys2">Physics 2: Algebra-Based</label>
+<br>
+
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="mus" name="AP Music Theory"
+               onclick="getElementById('mus_score').focus()">
+        <label for="mus">Music Theory</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="mus_score" name="mus_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="phys_em" name="AP Physics C: Electricity and Magnestism">
-    <label for="phys_em">Physics C: Electricity and Magnestism</label>
+
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="phys1" name="AP Physics 1: Algebra-Based"
+               onclick="getElementById('phys1_score').focus()">
+        <label for="phys1">Physics 1: Algebra-Based</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="phys1_score" name="phys1_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="phys_mech" name="AP Physics C: Mechanics">
-    <label for="phys_mech">Physics C: Mechanics</label>
+
+<br>
+
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="phys2" name="AP Physics 2: Algebra-Based"
+               onclick="getElementById('phys2_score').focus()">
+        <label for="phys2">Physics 2: Algebra-Based</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="phys2_score" name="phys2_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="psy" name="AP Psychology">
-    <label for="psy">Psychology</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="phys_em" name="AP Physics C: Electricity and Magnetism"
+               onclick="getElementById('phys_em_score').focus()">
+        <label for="phys_em">Physics C: Electricity and Magnetism</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="phys_em_score" name="phys_em_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="research" name="AP Research">
-    <label for="research">Research</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="phys_mech" name="AP Physics C: Mechanics"
+               onclick="getElementById('phys_mech_score').focus()">
+        <label for="phys_mech">Physics C: Mechanics</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="phys_mech_score" name="phys_mech_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="seminar" name="AP Seminar">
-    <label for="seminar">Seminar</label>
+<br>
+
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="psy" name="AP Psychology"
+               onclick="getElementById('psy_score').focus()">
+        <label for="psy">Psychology</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="psy_score" name="psy_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="spla" name="AP Spanish Language and Culture">
-    <label for="spla">Spanish Language and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="research" name="AP Research"
+               onclick="getElementById('research_score').focus()">
+        <label for="research">Research</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="research_score" name="research_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="spli" name="AP Spanish Literature and Culture">
-    <label for="spli">Spanish Literature and Culture</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="seminar" name="AP Seminar"
+               onclick="getElementById('seminar_score').focus()">
+        <label for="seminar">Seminar</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="seminar_score" name="seminar_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="stat" name="AP Statistics">
-    <label for="stat">Statistics</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="spla" name="AP Spanish Language and Culture"
+               onclick="getElementById('spla_score').focus()">
+        <label for="spla">Spanish Language and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="spla_score" name="spla_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="us_gov" name="AP United States Government and Politics">
-    <label for="us_gov">United States Government and Politics</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="spli" name="AP Spanish Literature and Culture"
+               onclick="getElementById('spli_score').focus()">
+        <label for="spli">Spanish Literature and Culture</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="spli_score" name="spli_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="us_hist" name="AP United States History">
-    <label for="us_hist">United States History</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="stat" name="AP Statistics"
+               onclick="getElementById('stat_score').focus()">
+        <label for="stat">Statistics</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="stat_score" name="stat_score" size="5">
+    </div>
 </div>
 
-<div>
-    <input type="checkbox" id="world_hist" name="AP World History: Modern">
-    <label for="world_hist">World History: Modern</label>
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="us_gov" name="AP United States Government and Politics"
+               onclick="getElementById('us_gov_score').focus()">
+        <label for="us_gov">United States Government and Politics</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="us_gov_score" name="us_gov_score" size="5">
+    </div>
+</div>
+
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="us_hist" name="AP United States History"
+               onclick="getElementById('us_hist_score').focus()">
+        <label for="us_hist">United States History</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="us_hist_score" name="us_hist_score" size="5">
+    </div>
+</div>
+
+<br>
+
+<div class="exam">
+   <div class="exam_name">
+        <input type="checkbox" class="exam_checkbox" id="world_hist" name="AP World History: Modern"
+               onclick="getElementById('world_hist_score').focus()">
+        <label for="world_hist">World History: Modern</label>
+    </div>
+    <div class="exam_score">
+            <input type="text" class="exam_text" id="world_hist_score" name="world_hist_score" size="5">
+    </div>
 </div>
 
 <!-- End of AP courses -->
 
 <!-- College results -->
 <br>
+<br>
+<br>
 
-<button id="click">Calculate credits</button>
+<div id="button_div">
+    <button id="calculate_btn">Calculate credits</button>
+</div>
 
-<div id="revelle" class="college">Revelle College</div>
 <br>
-<div id="muir" class="college">Muir College</div>
 <br>
-<div id="marshall" class="college">Marshall College</div>
 <br>
-<div id="warren" class="college">Warren College</div>
-<br>
-<div id="roosevelt" class="college">Roosevelt College</div>
-<br>
-<div id="sixth" class="college">Sixth College</div>
-<br>
-<div id="seventh" class="college">Seventh College</div>
+
+<!-- Table of results -->
+<table style="width:100%">
+    <!-- Table headers -->
+    <tr>
+        <th>Revelle</th>
+        <th>Muir</th>
+        <th>Marshall</th>
+        <th>Warren</th>
+        <th>Roosevelt</th>
+        <th>Sixth</th>
+        <th>Seventh</th>
+
+    </tr>
+
+</table>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    $('#click').click( function () {
+    $('#calculate_btn').click( function () {
         // Get all the check boxes on the page
-        const checkBoxes = document.getElementsByTagName("input");
+        const checkBoxes = document.getElementsByClassName("exam_checkbox");
+        const scores = document.getElementsByClassName("exam_text");
         // Add the checked courses to the array
         let courses = [];
         for (i = 0; i < checkBoxes.length; i++) {
             if (checkBoxes[i].checked) {
-                courses.push(checkBoxes[i].name)
+                let course = {
+                    "course": checkBoxes[i].name,
+                    "score": scores[i].value
+                };
+                courses.push(course)
             }
         }
 
+        console.log(courses);
+
         const collegeNames = ["revelle", "muir", "marshall", "warren", "roosevelt", "sixth", "seventh"];
         // Request the results of applying the AP courses as credit
+
          $.ajax({
              type: 'GET',
              data: {"courses": courses},
              url: '/data',
              success: function (response) {
-                const results = response.results;
-                console.log(results[0]);
-                // Display the results for each college
-                for (i = 0; i < results.length; i++) {
-                    collegeId = "#".concat(collegeNames[i]);
-                    $(collegeId).text(results[i])
-                }
+                console.log("Success");
             }
          }
          ); // end query

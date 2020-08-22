@@ -19,6 +19,12 @@ def calculate_credits(courses):
     results = []
     for college in colleges:
         college.apply_credits(ap_credits)
+        # Construct an object containing the relevant information
+        # upon applying credit
+        result = {
+            "total_units": college.get_unit_total(),
+            "requirements": college.get_re
+        }
         results.append(college.get_results_str())
 
     # Return the list of results

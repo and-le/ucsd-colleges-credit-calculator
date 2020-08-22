@@ -1,3 +1,70 @@
-.college {
-    white-space: pre-line;
+.header {
+    text-align: center;
+    padding: 60px;
+    background-color: #192847;
+    color: white;
+    font-family: Arial, sans-serif;
 }
+
+.instructions {
+    margin-left: 360px;
+    margin-right: 360px;
+    font-family: Arial, sans-serif;
+}
+
+#instructions_paragraph {
+    margin-left: 360px;
+    margin-right: 360px;
+    font-family: Arial, sans-serif;
+}
+
+#ap_exam_header {
+    margin-left: 360px;
+    margin-right: 360px;
+    font-family: Arial, sans-serif;
+}
+
+#exam_name_header {
+    width: 50%;
+    float: left;
+    height: 50px;
+    text-decoration: underline;
+}
+
+#exam_score_header {
+    margin-left: 50%;
+    height: 50px;
+    text-decoration: underline;
+}
+
+.exam {
+    margin-left: 360px;
+    margin-right: 360px;
+    font-family: Arial, sans-serif;
+}
+
+.exam_name {
+    float: left;
+}
+
+.exam_score {
+    margin-left: 50%;
+}
+
+#button_div {
+    text-align: center;
+}
+
+#calculate_btn {
+    background-color: #192847;
+    color: #FBCB07;
+    border: none;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+/*.college {*/
+/*    white-space: pre-line;*/
+/*}*/

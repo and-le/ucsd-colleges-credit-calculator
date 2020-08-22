@@ -388,7 +388,7 @@ class WarrenCollege(College):
         if self.pofc_sci.credit_units > 0:
             pofc_sci_str += f"{self.pofc_sci.name} PofC: {self.pofc_sci.credits} - Credited Units: {self.pofc_sci.credit_units}\n"
         else:
-            pofc_sci_str += f"Math, Natural Sciences and Engineering PofC: No Credits Applied\n"
+            pofc_sci_str += f"Math, Natural Sciences, and Engineering PofC: No Credits Applied\n"
         return pofc_sci_str
 
     def get_pofc_results_str(self):
