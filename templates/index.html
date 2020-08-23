@@ -563,38 +563,39 @@
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="../static/js/getExamInput.js"> </script>
 <script>
-    $('#calculate_btn').click( function () {
-        // Get all the check boxes on the page
-        const checkBoxes = document.getElementsByClassName("exam_checkbox");
-        const scores = document.getElementsByClassName("exam_text");
-        // Add the checked courses to the array
-        let courses = [];
-        for (i = 0; i < checkBoxes.length; i++) {
-            if (checkBoxes[i].checked) {
-                let course = {
-                    "course": checkBoxes[i].name,
-                    "score": scores[i].value
-                };
-                courses.push(course)
-            }
-        }
-
+    $('#calculate_btn').click(function () {
+        let courses = getExamInput();
         console.log(courses);
+            const collegeNames = ["revelle", "muir", "marshall", "warren", "roosevelt", "sixth", "seventh"];
+            // Request the results of applying the AP courses as credit
 
-        const collegeNames = ["revelle", "muir", "marshall", "warren", "roosevelt", "sixth", "seventh"];
-        // Request the results of applying the AP courses as credit
+            $.ajax({
+                    type: 'GET',
+                    data: {"courses": courses},
+                    url: '/data',
+                    success: function (response) {
+                        console.log("Success");
+                        const results = response.results;
 
-         $.ajax({
-             type: 'GET',
-             data: {"courses": courses},
-             url: '/data',
-             success: function (response) {
-                console.log("Success");
-            }
-         }
-         ); // end query
-    }
+
+                        const revelle = results[0];
+                        const muir = results[1];
+                        const marshall = results[2];
+                        const warren = results[3];
+                        const roosevelt = results[4];
+                        const sixth = results[5];
+                        const seventh = results[6];
+
+                        // TODO: Get results from each college and display them
+
+
+                        console.log(results);
+                    }
+                }
+            ); // end query
+        }
     ); // end event handler
 </script>
 

@@ -64,8 +64,34 @@ class College:
     def get_credited_units(self):
         return self.credited_units
 
+    def get_applied_credits(self):
+        """
+        Returns a list of names of the courses that were applied for AP Credit
+        :return:
+        """
+        applied_credits = []
+        for req in self.requirements:
+            if req.credit_units > 0:
+                for cred in req.credits:
+                    applied_credits.append(cred)
+        return applied_credits
+
     def get_net_units(self):
         return self.unit_total - self.credited_units
+
+    def get_college_result(self):
+        """
+        Returns the results of applying credit. The apply_credits() method should be called
+        before calling this method.
+        :return:
+        """
+        result = {
+            "unit_total": self.get_unit_total(),
+            "applied_credits": self.get_applied_credits(),
+            "credited_units": self.get_credited_units(),
+            "net_units": self.get_net_units(),
+        }
+        return result
 
     def display_requirements(self):
         for r in self.requirements:
@@ -91,9 +117,6 @@ class College:
                 credited_units_str += f"{req.name} - {req.credits} - Credited Units: {req.credit_units}\n"
 
         return credited_units_str
-
-
-
 
 
     def get_results_str(self):

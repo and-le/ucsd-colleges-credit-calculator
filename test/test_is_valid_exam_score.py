@@ -1,6 +1,6 @@
 import unittest
 
-from src.is_valid_exam_score import is_valid_exam_score
+from src.error_handling import is_valid_exam_score
 
 class ExamScoreTestCase(unittest.TestCase):
     def test_invalid_score_string(self):

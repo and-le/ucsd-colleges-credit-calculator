@@ -145,5 +145,15 @@ class WarrenTestCase(unittest.TestCase):
         self.assertTrue(hum_condition and soc_condition)
 
 
+    def test_unit_amounts(self):
+        college = init_college(WARREN_NAME)
+        credits = [
+            APCredit(AP_MUS, 5),  # Humanities and Fine Arts - Music
+            APCredit(AP_PSY, 5),  # Social Sciences - Psychology
+        ]
+        college.apply_credits(credits)
+        self.assertEqual()
+
+
 if __name__ == '__main__':
     unittest.main()

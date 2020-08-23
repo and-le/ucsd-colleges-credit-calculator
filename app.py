@@ -1,7 +1,8 @@
 from flask import Flask, render_template, request, jsonify
 
 from calculate_credits import calculate_credits
-from src.is_valid_exam_score import is_valid_exam_score
+from src.error_handling import is_valid_exam_score
+from src.requirements import APCredit
 
 app = Flask(__name__)
 
@@ -28,9 +29,14 @@ def data():
             course_names.append(request.args.get(f"courses[{i}][course]"))
             course_scores.append(request.args.get(f"courses[{i}][score]"))
 
-    # results = calculate_credits(courses)
-    # data = {"results" : results}
-    return "Plaaceholder"
+    # Create the APCredits
+    credits = [APCredit(name, score) for (name, score) in zip(course_names, course_scores)]
+
+    # Apply the credits to each college
+    results = calculate_credits(credits)
+    data = {"results" : results}
+    return data
+
 
 if __name__ == "__main__":
     app.run(debug=True)

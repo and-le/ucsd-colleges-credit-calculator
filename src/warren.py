@@ -61,7 +61,6 @@ class WarrenCollege(College):
         self.area_study_soc = None
         self.area_study_soc_credited_units = 0
 
-
         for r in requirements:
             if r.name == POFC:
                 self.pofc_unit_total += r.unit_total
@@ -207,6 +206,18 @@ class WarrenCollege(College):
             else:
                 self.gen_credited_units += req.credit_units
 
+    def get_gen_unit_total(self):
+        return self.gen_unit_total
+
+    def get_gen_applied_credits(self):
+        applied_credits = []
+        for req in self.requirements:
+            if req.name != POFC and req.name != AREA_STUDY and req.credit_units > 0:
+                for cred in req.credits:
+                    applied_credits.append(cred)
+        return applied_credits
+
+
     def get_pofc(self, name):
         """
         Returns the PofC Requirement with the given name.
@@ -225,28 +236,107 @@ class WarrenCollege(College):
     def get_area_study_unit_total(self):
         return self.area_study_unit_total
 
-    def get_gen_unit_total(self):
-        return self.gen_unit_total
+    def get_pofc_hum_applied_credits(self):
+        return [cred for cred in self.pofc_hum.credits]
 
-    # Warren College has several different unit totals. Conseuqently, methods
+    def get_pofc_soc_applied_credits(self):
+        return [cred for cred in self.pofc_soc.credits]
+
+    def get_pofc_sci_applied_credits(self):
+        return [cred for cred in self.pofc_sci.credits]
+
+    def get_area_study_hum_applied_credits(self):
+        return [cred for cred in self.area_study_hum.credits]
+
+    def get_area_study_soc_applied_credits(self):
+        return [cred for cred in self.area_study_soc.credits]
+
+    def get_pofc_hum_soc_net_units(self):
+        """
+        Returns the amount of units for a Humanities + Social Sciences PofC combination after applying credit
+        :return:
+        """
+        total_units = self.gen_unit_total + self.pofc_unit_total
+        applied_units = self.gen_credited_units + self.pofc_hum.credit_units + self.pofc_soc.credit_units
+        return total_units - applied_units
+
+
+    def get_pofc_hum_sci_net_units(self):
+        """
+        Returns the amount of units for a Humanities + Science PofC combination after applying credit
+        :return:
+        """
+        total_units = self.gen_unit_total + self.pofc_unit_total
+        applied_units = self.gen_credited_units + self.pofc_hum.credit_units + self.pofc_sci.credit_units
+        return total_units - applied_units
+
+    def get_pofc_soc_sci_net_units(self):
+        """
+        Returns the amount of units for a Social Sciences + Science PofC combination after applying credit
+        :return:
+        """
+        total_units = self.gen_unit_total + self.pofc_unit_total
+        applied_units = self.gen_credited_units + self.pofc_soc.credit_units + self.pofc_sci.credit_units
+        return total_units - applied_units
+
+    def get_area_study_net_units(self):
+        total_units = self.gen_unit_total + self.area_study_unit_total
+        applied_units = self.gen_credited_units + self.area_study_hum.credit_units + self.area_study_soc.credit_units
+        return total_units - applied_units
+
+
+    # Warren College has several different unit totals. Consequently, methods
     # that report a singular unit total don't make sense for Warren.
 
     def compute_unit_total(self, requirements):
         """
-        Not implemented, but super-class constructor calls this method, so a NotImplementedError cannot be raised
+        Not applicable, but the super-class constructor calls this method, so this an empty implementation
         :param requirements:
         :return:
         """
         pass
 
     def get_unit_total(self):
-        raise NotImplementedError()
+        return "Unit total varies"
 
     def get_credited_units(self):
-        raise NotImplementedError()
+        return "Credited units varies"
+
+    def get_applied_credits(self):
+        return "Applied credits varies"
 
     def get_net_units(self):
-        raise NotImplementedError()
+        return "Net units varies"
+    
+    
+    def get_college_result(self):
+        result = {
+            "unit_total": self.get_unit_total(),
+            "applied_credits": self.get_applied_credits(),
+            "credited_units": self.get_credited_units(),
+            "net_units": self.get_net_units(),
+
+            # Special fields for Warren College
+            "warren_gen_unit_total": self.get_gen_unit_total(),
+            "warren_gen_applied_credits": self.get_gen_applied_credits(),
+            "warren_gen_credited_units": self.gen_credited_units,
+
+            "warren_pofc_unit_total": self.pofc_unit_total,
+            "warren_as_unit_total": self.area_study_unit_total,
+
+            "warren_pofc_hum_applied_credits": self.get_pofc_hum_applied_credits(),
+            "warren_pofc_soc_applied_credits": self.get_pofc_soc_applied_credits(),
+            "warren_pofc_sci_applied_credits": self.get_pofc_sci_applied_credits(),
+            "warren_as_hum_applied_credits": self.get_area_study_hum_applied_credits(),
+            "warren_as_soc_applied_credits": self.get_area_study_soc_applied_credits(),
+
+            "warren_pofc_hum_soc_net_units": self.get_pofc_hum_soc_net_units(),
+            "warren_pofc_hum_sci_net_units": self.get_pofc_hum_sci_net_units(),
+            "warren_pofc_soc_sci_net_units": self.get_pofc_soc_sci_net_units(),
+            "warren_as_hum_soc_net_units": self.get_area_study_net_units(),
+        }
+
+        return result
 
     def display_gen_results(self):
         print(f"Non-PofC and Non-Area-Study Credits:\n")
