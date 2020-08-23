@@ -74,6 +74,7 @@ class College:
             if req.credit_units > 0:
                 for cred in req.credits:
                     applied_credits.append(cred)
+        # Remove the "AP " from each string. The "AP " takes up the first 3 characters.
         return applied_credits
 
     def get_net_units(self):
@@ -87,7 +88,7 @@ class College:
         """
         result = {
             "unit_total": self.get_unit_total(),
-            "applied_credits": self.get_applied_credits(),
+            "applied_credits": sorted(self.get_applied_credits()),
             "credited_units": self.get_credited_units(),
             "net_units": self.get_net_units(),
         }

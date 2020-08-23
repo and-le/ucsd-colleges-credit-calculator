@@ -217,7 +217,6 @@ class WarrenCollege(College):
                     applied_credits.append(cred)
         return applied_credits
 
-
     def get_pofc(self, name):
         """
         Returns the PofC Requirement with the given name.
@@ -235,6 +234,8 @@ class WarrenCollege(College):
 
     def get_area_study_unit_total(self):
         return self.area_study_unit_total
+
+    # Remove the "AP " from each string from the following methods. The "AP " takes up the first 3 characters.
 
     def get_pofc_hum_applied_credits(self):
         return [cred for cred in self.pofc_hum.credits]
@@ -260,7 +261,6 @@ class WarrenCollege(College):
         applied_units = self.gen_credited_units + self.pofc_hum.credit_units + self.pofc_soc.credit_units
         return total_units - applied_units
 
-
     def get_pofc_hum_sci_net_units(self):
         """
         Returns the amount of units for a Humanities + Science PofC combination after applying credit
@@ -284,7 +284,6 @@ class WarrenCollege(College):
         applied_units = self.gen_credited_units + self.area_study_hum.credit_units + self.area_study_soc.credit_units
         return total_units - applied_units
 
-
     # Warren College has several different unit totals. Consequently, methods
     # that report a singular unit total don't make sense for Warren.
 
@@ -307,28 +306,22 @@ class WarrenCollege(College):
 
     def get_net_units(self):
         return "Net units varies"
-    
-    
+
     def get_college_result(self):
         result = {
-            "unit_total": self.get_unit_total(),
-            "applied_credits": self.get_applied_credits(),
-            "credited_units": self.get_credited_units(),
-            "net_units": self.get_net_units(),
-
             # Special fields for Warren College
             "warren_gen_unit_total": self.get_gen_unit_total(),
-            "warren_gen_applied_credits": self.get_gen_applied_credits(),
+            "warren_gen_applied_credits": sorted(self.get_gen_applied_credits()),
             "warren_gen_credited_units": self.gen_credited_units,
 
             "warren_pofc_unit_total": self.pofc_unit_total,
             "warren_as_unit_total": self.area_study_unit_total,
 
-            "warren_pofc_hum_applied_credits": self.get_pofc_hum_applied_credits(),
-            "warren_pofc_soc_applied_credits": self.get_pofc_soc_applied_credits(),
-            "warren_pofc_sci_applied_credits": self.get_pofc_sci_applied_credits(),
-            "warren_as_hum_applied_credits": self.get_area_study_hum_applied_credits(),
-            "warren_as_soc_applied_credits": self.get_area_study_soc_applied_credits(),
+            "warren_pofc_hum_applied_credits": sorted(self.get_pofc_hum_applied_credits()),
+            "warren_pofc_soc_applied_credits": sorted(self.get_pofc_soc_applied_credits()),
+            "warren_pofc_sci_applied_credits": sorted(self.get_pofc_sci_applied_credits()),
+            "warren_as_hum_applied_credits": sorted(self.get_area_study_hum_applied_credits()),
+            "warren_as_soc_applied_credits": sorted(self.get_area_study_soc_applied_credits()),
 
             "warren_pofc_hum_soc_net_units": self.get_pofc_hum_soc_net_units(),
             "warren_pofc_hum_sci_net_units": self.get_pofc_hum_sci_net_units(),
@@ -435,7 +428,8 @@ class WarrenCollege(College):
         print(f"\nThe following AP Courses were used toward 2) Social Sciences:")
         self.display_area_study_soc()
 
-        rem_units = as_total - (self.area_study_hum.credit_units + self.area_study_soc.credit_units) - self.gen_credited_units
+        rem_units = as_total - (
+                    self.area_study_hum.credit_units + self.area_study_soc.credit_units) - self.gen_credited_units
         print(f"\nAfter applying AP Credit, the remaining amount of units is {rem_units}.")
 
     def display_results(self):
@@ -445,7 +439,6 @@ class WarrenCollege(College):
         self.display_pofc_results()
         print()
         self.display_area_study_results()
-
 
     def get_gen_results_str(self):
         gen_results_str = ""
@@ -511,7 +504,6 @@ class WarrenCollege(College):
 
         return pofc_results_str
 
-
     def get_area_study_hum_str(self):
         as_hum_str = ""
         if self.area_study_hum.credit_units > 0:
@@ -521,7 +513,7 @@ class WarrenCollege(College):
         return as_hum_str
 
     def get_area_study_soc_str(self):
-        as_soc_str= ""
+        as_soc_str = ""
         if self.area_study_soc.credit_units > 0:
             as_soc_str += f"{self.area_study_soc.name} Area Study: {self.area_study_soc.credits} - Credited Units: {self.area_study_soc.credit_units}\n"
         else:
@@ -543,11 +535,10 @@ class WarrenCollege(College):
         as_results_str += self.get_area_study_soc_str()
 
         rem_units = as_total - (
-                    self.area_study_hum.credit_units + self.area_study_soc.credit_units) - self.gen_credited_units
+                self.area_study_hum.credit_units + self.area_study_soc.credit_units) - self.gen_credited_units
         as_results_str += f"\nAfter applying AP Credit, the remaining amount of units is {rem_units}."
 
         return as_results_str
-
 
     def get_results_str(self):
         results_str = ""
