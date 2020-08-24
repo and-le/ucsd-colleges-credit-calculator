@@ -310,23 +310,23 @@ class WarrenCollege(College):
     def get_college_result(self):
         result = {
             # Special fields for Warren College
-            "warren_gen_unit_total": self.get_gen_unit_total(),
-            "warren_gen_applied_credits": sorted(self.get_gen_applied_credits()),
-            "warren_gen_credited_units": self.gen_credited_units,
+            "gen_unit_total": self.get_gen_unit_total(),
+            "gen_applied_credits": sorted(self.get_gen_applied_credits()),
+            "gen_credited_units": self.gen_credited_units,
 
-            "warren_pofc_unit_total": self.pofc_unit_total,
-            "warren_as_unit_total": self.area_study_unit_total,
+            "pofc_unit_total": self.pofc_unit_total,
+            "as_unit_total": self.area_study_unit_total,
 
-            "warren_pofc_hum_applied_credits": sorted(self.get_pofc_hum_applied_credits()),
-            "warren_pofc_soc_applied_credits": sorted(self.get_pofc_soc_applied_credits()),
-            "warren_pofc_sci_applied_credits": sorted(self.get_pofc_sci_applied_credits()),
-            "warren_as_hum_applied_credits": sorted(self.get_area_study_hum_applied_credits()),
-            "warren_as_soc_applied_credits": sorted(self.get_area_study_soc_applied_credits()),
+            "pofc_hum_applied_credits": sorted(self.get_pofc_hum_applied_credits()),
+            "pofc_soc_applied_credits": sorted(self.get_pofc_soc_applied_credits()),
+            "pofc_sci_applied_credits": sorted(self.get_pofc_sci_applied_credits()),
+            "as_hum_applied_credits": sorted(self.get_area_study_hum_applied_credits()),
+            "as_soc_applied_credits": sorted(self.get_area_study_soc_applied_credits()),
 
-            "warren_pofc_hum_soc_net_units": self.get_pofc_hum_soc_net_units(),
-            "warren_pofc_hum_sci_net_units": self.get_pofc_hum_sci_net_units(),
-            "warren_pofc_soc_sci_net_units": self.get_pofc_soc_sci_net_units(),
-            "warren_as_hum_soc_net_units": self.get_area_study_net_units(),
+            "pofc_hum_soc_net_units": self.get_pofc_hum_soc_net_units(),
+            "pofc_hum_sci_net_units": self.get_pofc_hum_sci_net_units(),
+            "pofc_soc_sci_net_units": self.get_pofc_soc_sci_net_units(),
+            "as_hum_soc_net_units": self.get_area_study_net_units(),
         }
 
         return result

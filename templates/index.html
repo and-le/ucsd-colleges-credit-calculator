@@ -15,6 +15,8 @@
     1. Select the AP courses that you have completed and/or plan to complete.
     <br>
     2. Click the "Calculate Credits" button.
+    <br>
+    3. View which credits have been applied below.
 </p>
 
 <br>
@@ -696,40 +698,40 @@
 
     <tr>
         <th>Humanities and Fine Arts: credited AP courses</th>
-        <td class="text_td" id="warren_hum_ap_td">
-            <ul id="warren_hum_ap_ul"></ul>
+        <td class="text_td" id="warren_pofc_hum_ap_td">
+            <ul id="warren_pofc_hum_ap_ul"></ul>
         </td>
     </tr>
 
     <tr class="shaded_tr">
         <th>Social Sciences: credited AP courses</th>
-        <td class="text_td" id="warren_soc_ap_td">
-            <ul id="warren_soc_ap_ul"></ul>
+        <td class="text_td" id="warren_pofc_soc_ap_td">
+            <ul id="warren_pofc_soc_ap_ul"></ul>
         </td>
     </tr>
 
     <tr>
         <th>Math, Natural Sciences, and Engineering: credited AP courses</th>
         <td class="text_td" id="warren_sci_ap_td">
-            <ul id="warren_sci_ap_ul"></ul>
+            <ul id="warren_pofc_sci_ap_ul"></ul>
         </td>
     </tr>
 
     <tr class="shaded_tr">
         <th>Humanities and Fine Arts + Social Sciences: remaining units</th>
-        <td class="numerical_td" id="warren_hum_soc">
+        <td class="numerical_td" id="warren_pofc_rem_hum_soc">
         </td>
     </tr>
 
     <tr>
         <th>Humanities and Fine Arts + Math, Natural Sciences, and Engineering: remaining units</th>
-        <td class="numerical_td" id="warren_hum_sci">
+        <td class="numerical_td" id="warren_pofc_rem_hum_sci">
         </td>
     </tr>
 
     <tr class="shaded_tr">
         <th>Social Sciences + Math, Natural Sciences and Engineering: remaining units</th>
-        <td class="numerical_td" id="warren_soc_sci">
+        <td class="numerical_td" id="warren_pofc_rem_soc_sci">
         </td>
     </tr>
 
@@ -757,19 +759,19 @@
 
     <tr>
         <th>Humanities and Fine Arts: credited AP courses</th>
-        <td class="text_td" id="warren_hum_as_td">
-            <ul id="warren_hum_as_ul"></ul>
+        <td class="text_td" id="warren_as_hum_td">
+            <ul id="warren_as_hum_ul"></ul>
         </td>
     </tr>
 
-     <tr class="shaded_tr">
+    <tr class="shaded_tr">
         <th>Social Sciences: credited AP courses</th>
-        <td class="text_td" id="warren_soc_as_td">
-            <ul id="warren_soc_as_ul"></ul>
+        <td class="text_td" id="warren_as_soc_td">
+            <ul id="warren_as_soc_ul"></ul>
         </td>
     </tr>
 
-      <tr>
+    <tr>
         <th>Remaining units</th>
         <td class="numerical_td" id="warren_as_rem_td"></td>
     </tr>
@@ -777,7 +779,23 @@
 </table>
 
 <!-- Footer -->
-<h1 class="footer">Footer</h1>
+<br>
+<br>
+<br>
+<hr>
+<p class="disclaimer">This calculator is based on the 2020-2021 academic year requirements, which can be found
+    <a href="https://www.ucsd.edu/catalog/pdf/APC-chart.pdf" target="_blank">here.</a>
+</p>
+
+<p class="disclaimer">
+    Disclaimer: This tool is accurate to the best of my knowledge. If you find any inaccuracies, please let me
+    know at
+    <a href="mailto: a1le@ucsd.edu">a1le@ucsd.edu.</a>
+</p>
+
+<p class="disclaimer">
+    This application is neither sponsored by nor affiliated with the University of California, San Diego.
+</p>
 
 
 <!-- Scripts -->
@@ -810,51 +828,56 @@
 
                         // Update the view with the results from each college
 
-                        if (isEmpty("marshall")) {
-                            document.getElementById("marshall_unit_total_td").textContent = marshall.unit_total;
-                            displayCredits("marshall", marshall.applied_credits);
-                            document.getElementById("marshall_cr_td").textContent = marshall.credited_units;
-                            document.getElementById("marshall_rem_td").textContent = marshall.net_units;
-                        }
+                        document.getElementById("marshall_unit_total_td").textContent = marshall.unit_total;
+                        displayCredits("marshall_ap_ul", marshall.applied_credits);
+                        document.getElementById("marshall_cr_td").textContent = marshall.credited_units;
+                        document.getElementById("marshall_rem_td").textContent = marshall.net_units;
 
-                        if (isEmpty("muir")) {
-                            document.getElementById("muir_unit_total_td").textContent = muir.unit_total;
-                            displayCredits("muir", muir.applied_credits);
-                            document.getElementById("muir_cr_td").textContent = muir.credited_units;
-                            document.getElementById("muir_rem_td").textContent = muir.net_units;
-                        }
+                        document.getElementById("muir_unit_total_td").textContent = muir.unit_total;
+                        displayCredits("muir_ap_ul", muir.applied_credits);
+                        document.getElementById("muir_cr_td").textContent = muir.credited_units;
+                        document.getElementById("muir_rem_td").textContent = muir.net_units;
 
-                        if (isEmpty("revelle")) {
-                            document.getElementById("revelle_unit_total_td").textContent = revelle.unit_total;
-                            displayCredits("revelle", revelle.applied_credits);
-                            document.getElementById("revelle_cr_td").textContent = revelle.credited_units;
-                            document.getElementById("revelle_rem_td").textContent = revelle.net_units;
-                        }
+                        document.getElementById("revelle_unit_total_td").textContent = revelle.unit_total;
+                        displayCredits("revelle_ap_ul", revelle.applied_credits);
+                        document.getElementById("revelle_cr_td").textContent = revelle.credited_units;
+                        document.getElementById("revelle_rem_td").textContent = revelle.net_units;
 
-                        if (isEmpty("roosevelt")) {
-                            document.getElementById("roosevelt_unit_total_td").textContent = roosevelt.unit_total;
-                            displayCredits("roosevelt", roosevelt.applied_credits);
-                            document.getElementById("roosevelt_cr_td").textContent = roosevelt.credited_units;
-                            document.getElementById("roosevelt_rem_td").textContent = roosevelt.net_units;
-                        }
+                        document.getElementById("roosevelt_unit_total_td").textContent = roosevelt.unit_total;
+                        displayCredits("roosevelt_ap_ul", roosevelt.applied_credits);
+                        document.getElementById("roosevelt_cr_td").textContent = roosevelt.credited_units;
+                        document.getElementById("roosevelt_rem_td").textContent = roosevelt.net_units;
 
 
-                        if (isEmpty("seventh")) {
-                            document.getElementById("seventh_unit_total_td").textContent = seventh.unit_total;
-                            displayCredits("seventh", seventh.applied_credits);
-                            document.getElementById("seventh_cr_td").textContent = seventh.credited_units;
-                            document.getElementById("seventh_rem_td").textContent = seventh.net_units;
-                        }
+                        document.getElementById("seventh_unit_total_td").textContent = seventh.unit_total;
+                        displayCredits("seventh_ap_ul", seventh.applied_credits);
+                        document.getElementById("seventh_cr_td").textContent = seventh.credited_units;
+                        document.getElementById("seventh_rem_td").textContent = seventh.net_units;
 
 
-                        if (isEmpty("sixth")) {
-                            document.getElementById("sixth_unit_total_td").textContent = sixth.unit_total;
-                            displayCredits("sixth", sixth.applied_credits);
-                            document.getElementById("sixth_cr_td").textContent = sixth.credited_units;
-                            document.getElementById("sixth_rem_td").textContent = sixth.net_units;
-                        }
+                        document.getElementById("sixth_unit_total_td").textContent = sixth.unit_total;
+                        displayCredits("sixth_ap_ul", sixth.applied_credits);
+                        document.getElementById("sixth_cr_td").textContent = sixth.credited_units;
+                        document.getElementById("sixth_rem_td").textContent = sixth.net_units;
 
-                        // TODO: Warren tables (3)
+                        document.getElementById("warren_gen_unit_total_td").textContent = warren.gen_unit_total;
+                        console.log(document.getElementById("warren_gen_ap_ul"));
+                        displayCredits("warren_gen_ap_ul", warren.gen_applied_credits);
+
+                        // PofC table
+                        document.getElementById("warren_pofc_unit_total_td").textContent = warren.pofc_unit_total;
+                        displayCredits("warren_pofc_hum_ap_ul", warren.pofc_hum_applied_credits);
+                        displayCredits("warren_pofc_soc_ap_ul", warren.pofc_soc_applied_credits);
+                        displayCredits("warren_pofc_sci_ap_ul", warren.pofc_sci_applied_credits);
+                        document.getElementById("warren_pofc_rem_hum_soc").textContent = warren.pofc_hum_soc_net_units;
+                        document.getElementById("warren_pofc_rem_hum_sci").textContent = warren.pofc_hum_sci_net_units;
+                        document.getElementById("warren_pofc_rem_soc_sci").textContent = warren.pofc_soc_sci_net_units;
+
+                        // AS table
+                        document.getElementById("warren_as_unit_total_td").textContent = warren.as_unit_total;
+                        displayCredits("warren_as_hum_ul", warren.as_hum_applied_credits);
+                        displayCredits("warren_as_soc_ul", warren.as_soc_applied_credits);
+                        document.getElementById("warren_as_rem_td").textContent = warren.as_hum_soc_net_units;
 
                         console.log(results);
                     }
