@@ -111,7 +111,7 @@ class WarrenCollege(College):
                                         else:
                                             continue
                                     elif (pofc.name == WARREN_PHYS_NAME) and cred.course in {AP_PHYS_EM, AP_PHYS_MECH}:
-                                        if cred.course >= AP_SCORE_4:
+                                        if cred.score >= AP_SCORE_4:
                                             pofc.add_credit(cred.course, FOUR_UNITS)
                                         else:
                                             continue
