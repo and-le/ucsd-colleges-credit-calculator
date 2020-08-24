@@ -21,15 +21,26 @@ WARREN_POFC_FOUR_UNIT_COURSES = {AP_MACRO, AP_MICRO, AP_ENV, AP_US_GOV, AP_COMP_
 # qualifying credits for these PofC, then the maximum number of units they can earn is 12.
 WARREN_POFC_VIS_ARTS_COURSES = {AP_DRAW, AP_2D, AP_3D, AP_ART_HIST}
 WARREN_POFC_HIST_COURSES = {AP_WORLD_HIST, AP_US_HIST, AP_EURO_HIST}
+
 # Since Foreign Language credits are a subset of Literature credits, Literature credits will always take
 # precedence when determining which Program of Concentration yields the most units.
+WARREN_CONDITIONAL_LIT_COURSES = {AP_SPLA, AP_SPLI, AP_GER, AP_ITA, AP_FREN}
 WARREN_POFC_LIT_COURSES = {AP_ENG_LANG, AP_ENG_LIT, AP_LAT, AP_SPLA, AP_SPLI, AP_GER, AP_ITA, AP_FREN, AP_CHEM, AP_JAP}
 WARREN_POFC_LANG_COURSES = {AP_SPLA, AP_SPLI, AP_GER, AP_ITA, AP_FREN, AP_CHEM, AP_JAP}
 
-WARREN_VIS_ART_POFC_NAME = "Visual Arts"
-WARREN_HIST_POFC_NAME = "History"
-WARREN_LIT_POFC_NAME = "Literature"
-WARREN_LANG_POFC_NAME = "Foreign Language and Culture"
+WARREN_SCORE_OF_FOUR_POFC_COURSES = {}
+
+WARREN_VIS_ART_NAME = "Visual Arts"
+WARREN_HIST_NAME = "History"
+WARREN_LIT_NAME = "Literature"
+WARREN_LANG_NAME = "Foreign Language and Culture"
+
+WARREN_BIO_NAME = "Biology"
+WARREN_CHEM_NAME = "Chemistry"
+WARREN_SCI_NAME = "Science and Technology"
+WARREN_ECON_NAME = "Economics"
+WARREN_MATH_NAME = "Mathematics"
+WARREN_PHYS_NAME = "Physics"
 
 
 class WarrenCollege(College):
@@ -84,7 +95,7 @@ class WarrenCollege(College):
             # Iterate over the college reqs
             for req in self.requirements:
                 # If the AP Credit fulfills a college requirement
-                if cred.course in req.courses:
+                if cred.course in req.courses and cred.score >= AP_SCORE_3:
 
                     # If the requirement is a PofC
                     if req.name == POFC:
@@ -94,40 +105,98 @@ class WarrenCollege(College):
                             if cred.course in pofc.courses:
 
                                 if cred.course in WARREN_POFC_FOUR_UNIT_COURSES:
-                                    pofc.add_credit(cred.course, FOUR_UNITS)
+                                    if (pofc.name == WARREN_ECON_NAME) and cred.course in {AP_MACRO, AP_MICRO}:
+                                        if cred.score >= AP_SCORE_5:
+                                            pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            continue
+                                    elif (pofc.name == WARREN_PHYS_NAME) and cred.course in {AP_PHYS_EM, AP_PHYS_MECH}:
+                                        if cred.course >= AP_SCORE_4:
+                                            pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            continue
+                                    else:
+                                        pofc.add_credit(cred.course, FOUR_UNITS)
 
                                 else:
                                     # If a course belongs to a PofC for which there are multiple 8-unit credits
                                     # and the current PofC is such a PofC
-                                    if pofc.name == WARREN_VIS_ART_POFC_NAME and cred.course in WARREN_POFC_VIS_ARTS_COURSES:
+                                    if pofc.name == WARREN_VIS_ART_NAME and cred.course in WARREN_POFC_VIS_ARTS_COURSES:
                                         # If a credit was already applied
-                                        if pofc.credits:
+                                        if pofc.credit_units == EIGHT_UNITS:
                                             # Add 4 units to meet the unit limit
                                             pofc.add_credit(cred.course, FOUR_UNITS)
                                         else:
                                             pofc.add_credit(cred.course, EIGHT_UNITS)
 
-                                    elif pofc.name == WARREN_HIST_POFC_NAME and cred.course in WARREN_POFC_HIST_COURSES:
-                                        if pofc.credits:
+                                    elif pofc.name == WARREN_HIST_NAME and cred.course in WARREN_POFC_HIST_COURSES:
+                                        if pofc.credit_units == EIGHT_UNITS:
                                             pofc.add_credit(cred.course, FOUR_UNITS)
                                         else:
                                             pofc.add_credit(cred.course, EIGHT_UNITS)
 
-                                    elif pofc.name == WARREN_LIT_POFC_NAME and cred.course in WARREN_POFC_LIT_COURSES:
-                                        if pofc.credits:
-                                            pofc.add_credit(cred.course, FOUR_UNITS)
-                                        else:
-                                            pofc.add_credit(cred.course, EIGHT_UNITS)
+                                    elif pofc.name == WARREN_LIT_NAME and cred.course in WARREN_POFC_LIT_COURSES:
 
-                                    elif pofc.name == WARREN_LANG_POFC_NAME and cred.course in WARREN_POFC_LANG_COURSES:
-                                        if pofc.credits:
+                                        # Edge case: 8 units have been applied
+                                        if pofc.credit_units == EIGHT_UNITS:
+                                            # Special cases for these literature credits
+                                            if cred.course in WARREN_CONDITIONAL_LIT_COURSES:
+                                                if cred.course == AP_SPLI and cred.score == AP_SCORE_3:
+                                                    pofc.add_credit(cred.course, FOUR_UNITS)
+                                                elif cred.score >= AP_SCORE_4:
+                                                    pofc.add_credit(cred.course, FOUR_UNITS)
+                                                else:
+                                                    continue
+                                            # Normal case
+                                            else:
+                                                pofc.add_credit(cred.course, FOUR_UNITS)
+
+                                        # 0, 4, or 12 units have been applied
+                                        else:
+                                            # Special cases for these literature credits
+                                            if cred.course in WARREN_CONDITIONAL_LIT_COURSES:
+                                                if cred.course == AP_SPLI and cred.score == AP_SCORE_3:
+                                                    pofc.add_credit(cred.course, FOUR_UNITS)
+                                                elif cred.score == AP_SCORE_4:
+                                                    pofc.add_credit(cred.course, FOUR_UNITS)
+                                                elif cred.score == AP_SCORE_5:
+                                                    pofc.add_credit(cred.course, EIGHT_UNITS)
+                                                else:
+                                                    continue
+                                            # Normal case
+                                            else:
+                                                pofc.add_credit(cred.course, EIGHT_UNITS)
+
+                                    elif pofc.name == WARREN_LANG_NAME and cred.course in WARREN_POFC_LANG_COURSES:
+                                        if pofc.credit_units == EIGHT_UNITS:
                                             pofc.add_credit(cred.course, FOUR_UNITS)
                                         else:
                                             pofc.add_credit(cred.course, EIGHT_UNITS)
 
                                     # Course doesn't belong to a PofC for which there are multiple 8-unit credits
                                     else:
-                                        pofc.add_credit(cred.course, EIGHT_UNITS)
+                                        # Biology
+                                        if pofc.name == WARREN_BIO_NAME:
+                                            if cred.course == AP_BIO and cred.score >= AP_SCORE_4:
+                                                pofc.add_credit(cred.course, EIGHT_UNITS)
+                                            else:
+                                                continue
+                                        # Chemistry
+                                        elif pofc.name == WARREN_CHEM_NAME:
+                                            if cred.course == AP_CHEM and cred.score == AP_SCORE_5:
+                                                pofc.add_credit(cred.course, EIGHT_UNITS)
+                                            else:
+                                                continue
+
+                                        # Calculus
+                                        elif pofc.name == WARREN_MATH_NAME:
+                                            if cred.course == AP_CALC_BC and cred.score >= AP_SCORE_4:
+                                                pofc.clear_credits()
+                                                pofc.add_credit(cred.course, EIGHT_UNITS)
+                                            else:
+                                                pofc.add_credit(cred.course, FOUR_UNITS)
+                                        else:
+                                            pofc.add_credit(cred.course, EIGHT_UNITS)
 
                     # If the requirement is an AS
                     elif req.name == AREA_STUDY:
@@ -135,11 +204,31 @@ class WarrenCollege(College):
                         for area_study in self.area_studies:
                             # If the AP credit fulfills the PofC
                             if cred.course in area_study.courses:
-                                area_study.add_credit(cred.course, FOUR_UNITS)
+
+                                # Economics
+                                if area_study.name == WARREN_ECON_NAME and cred.course in {AP_MACRO, AP_MICRO}:
+                                    if cred.score >= AP_SCORE_5:
+                                        req.add_credit(cred.course, FOUR_UNITS)
+                                    else:
+                                        continue
+                                elif area_study.name == WARREN_LIT_NAME and cred.course in WARREN_CONDITIONAL_LIT_COURSES:
+                                    if cred.course == AP_SPLI:
+                                        req.add_credit(cred.course, FOUR_UNITS)
+                                    elif cred.score >= AP_SCORE_4:
+                                        req.add_credit(cred.course, FOUR_UNITS)
+                                else:
+                                    area_study.add_credit(cred.course, FOUR_UNITS)
 
                     # If the requirement is *not* a PofC or AS
                     else:
-                        req.add_credit(cred.course, FOUR_UNITS)
+                        if cred.course == AP_CALC_BC:
+                            if cred.score >= AP_SCORE_4:
+                                req.clear_credits()
+                                req.add_credit(cred.course, EIGHT_UNITS)
+                            else:
+                                req.add_credit(cred.course, FOUR_UNITS)
+                        else:
+                            req.add_credit(cred.course, FOUR_UNITS)
 
         self.compute_best_pofc()
         self.compute_best_as()

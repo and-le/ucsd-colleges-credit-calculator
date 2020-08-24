@@ -5,6 +5,8 @@ MARSHALL_PHYS_COURSES = {AP_PHYS_1, AP_PHYS_2, AP_PHYS_MECH, AP_PHYS_EM}
 MARSHALL_8_UNIT_BREADTH_COURSES = {AP_DRAW, AP_2D, AP_3D, AP_MUS, AP_US_HIST, AP_EURO_HIST, AP_WORLD_HIST,
                                    AP_CHIN, AP_FREN, AP_GER, AP_ITA, AP_JAP, AP_SPLA, AP_SPLI}
 
+MARSHALL_SCORE_OF_FOUR_COURSES = {AP_CALC_AB, AP_CALC_BC}
+
 class MarshallCollege(College):
 
     def __init__(self, name, requirements):
@@ -19,12 +21,23 @@ class MarshallCollege(College):
         :param credits:
         :return:
         """
+        # Reset credited units
+        self.credited_units = 0
+
         for cred in credits:
             for req in self.requirements:
-                if cred.course in req.courses:
+                if cred.course in req.courses and cred.score >= AP_SCORE_3:
+
+                    if cred.course in MARSHALL_SCORE_OF_FOUR_COURSES:
+                        if cred.score >= AP_SCORE_4:
+                            if cred.course == AP_CALC_BC:
+                                req.clear_credits()
+                                req.add_credit(cred.course, EIGHT_UNITS)
+                            else:
+                                req.add_credit(cred.course, FOUR_UNITS)
 
                     # Only 1 physics credit allowed; skip additional physics credits
-                    if (cred.course == AP_PHYS_1) and \
+                    elif (cred.course == AP_PHYS_1) and \
                             (AP_PHYS_2 in req.credits or AP_PHYS_MECH in req.credits or AP_PHYS_EM in req.credits):
                         continue
                     elif (cred.course == AP_PHYS_2) and \

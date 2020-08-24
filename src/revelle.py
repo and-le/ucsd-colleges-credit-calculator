@@ -19,6 +19,9 @@ class RevelleCollege(College):
         :param credits: List of AP Credits
         :return:
         """
+        # Reset credited units
+        self.credited_units = 0
+
         # Iterate over the AP Credits
         for cred in credits:
             # Iterate over the college's requirements
@@ -41,7 +44,7 @@ class RevelleCollege(College):
                             continue
 
                     elif cred.course in REVELLE_SCORE_OF_FIVE_COURSES:
-                        if cred.score >= AP_SCORE_5:
+                        if cred.score == AP_SCORE_5:
                             req.add_credit(cred.course, FOUR_UNITS)
                         # Score is < 5
                         else:

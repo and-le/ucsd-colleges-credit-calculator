@@ -3,6 +3,8 @@ from .ap_constants import *
 
 SIXTH_8_UNIT_SCIENCE_COURSES = {AP_BIO, AP_CHEM, AP_PHYS_1, AP_PHYS_2}
 SIXTH_8_UNIT_ART_COURSES = {AP_DRAW, AP_2D, AP_3D, AP_MUS, AP_ART_HIST}
+SIXTH_SCORE_OF_FOUR_COURSES = {AP_CSA, AP_CSP, AP_ENV, AP_PSY, AP_MACRO, AP_MICRO, AP_COMP_GOV, AP_US_GOV}
+
 
 class SixthCollege(College):
 
@@ -18,27 +20,35 @@ class SixthCollege(College):
         :param credits:
         :return:
         """
+        # Reset credited units
+        self.credited_units = 0
+
         for cred in credits:
             for req in self.requirements:
-                if cred.course in req.courses:
-                    # Special cases:
+                if cred.course in req.courses and cred.score >= AP_SCORE_3:
 
-                    # A - Social Sciences
-                    # Pick at most 1 from each of the following
-                    # 1. Only one of {AP Macroeconomics, AP Microeconomics}
-                    # 2. Only one of {AP Comparative Government and Politics, AP United States Government and Politics}
-                    if \
-                            (cred.course == AP_MACRO and AP_MICRO in req.credits) or \
+                    if cred.course in SIXTH_SCORE_OF_FOUR_COURSES:
+                        if cred.score >= AP_SCORE_4:
+                            # Pick at most 1 from each of the following
+                            # 1. Only one of {AP Macroeconomics, AP Microeconomics}
+                            # 2. Only one of {AP Comparative Government and Politics, AP United States Government and Politics}
+
+                            # If any of the following conditions is True, skip adding the current course
+                            if (cred.course == AP_MACRO and AP_MICRO in req.credits) or \
                                     (cred.course == AP_MICRO and AP_MACRO in req.credits) or \
                                     (cred.course == AP_COMP_GOV and AP_US_GOV in req.credits) or \
                                     (cred.course == AP_US_GOV and AP_COMP_GOV in req.credits):
-                        continue
+                                continue
+                            else:
+                                req.add_credit(cred.course, FOUR_UNITS)
+                        else:
+                            continue
 
-                    # B - Science
+                    # Science
                     elif cred.course in SIXTH_8_UNIT_SCIENCE_COURSES:
                         req.add_credit(cred.course, EIGHT_UNITS)
 
-                    # C - Art
+                    # Art
                     elif cred.course in SIXTH_8_UNIT_ART_COURSES:
                         req.add_credit(cred.course, EIGHT_UNITS)
 

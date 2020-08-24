@@ -3,6 +3,9 @@ from .ap_constants import *
 
 MUIR_LANGUAGE_COURSES = {AP_CHIN, AP_GER, AP_ITA, AP_FREN, AP_SPLA, AP_SPLI, AP_JAP}
 
+MUIR_SCORE_OF_FOUR_COURSES = {AP_CALC_AB, AP_CALC_BC, AP_PSY}
+MUIR_SCORE_OF_FIVE_COURSES = {AP_CHEM, AP_MACRO, AP_MICRO, AP_COMP_GOV, AP_US_GOV}
+
 
 class MuirCollege(College):
 
@@ -26,9 +29,14 @@ class MuirCollege(College):
         allows students to choose courses from a specific focus area without mixing and matching. As a result,
         this algorithm determines which focus area would credit the most units and reports that area in its unit
         counting. The SubRequirement class is used to track each focus area.
+
+        Note: All Muir requirements belong to some SubRequirement.
+        Note: The AP Calculus AB and BC minimum requirement of 4 was inferred from Revelle College.
         :param credits:
         :return:
         """
+        # Reset credited units
+        self.credited_units = 0
 
         # Iterate over AP Credits
         for cred in credits:
@@ -38,17 +46,37 @@ class MuirCollege(College):
                 if cred.course in req.courses:
                     # Iterate over SubRequirements
                     for subreq in self.subrequirements:
+
                         is_subreq = False
-                        # If the AP Credit fulfills a SubRequirement
-                        if cred.course in subreq.courses:
 
-                            # Special cases:
-                            # AP Chemistry fulfills the entire Math or Natural Sciences Requirement
-                            if cred.course == AP_CHEM:
-                                # Clear out any previous Math or Science courses to reset the credited units
-                                subreq.clear_credits()
+                        # If the AP Credit fulfills a SubRequirement and meets the minimum score requirement
+                        if cred.course in subreq.courses and cred.score >= AP_SCORE_3:
 
-                                subreq.add_credit(cred.course, TWELVE_UNITS)
+                            # Score of five courses
+                            if cred.course in MUIR_SCORE_OF_FIVE_COURSES:
+                                if cred.score == AP_SCORE_5:
+
+                                    # AP Chemistry fulfills the entire Math or Natural Sciences Requirement
+                                    if cred.course == AP_CHEM:
+                                        # Clear out any previous Math or Science courses to reset the credited units
+                                        subreq.clear_credits()
+                                        subreq.add_credit(cred.course, TWELVE_UNITS)
+
+                                    # Other score of five courses
+                                    else:
+                                        subreq.add_credit(cred.course, FOUR_UNITS)
+                                # Score < 5
+                                else:
+                                    continue
+
+                            # Score of 4
+                            elif cred.course in MUIR_SCORE_OF_FOUR_COURSES:
+                                if cred.score >= AP_SCORE_4:
+                                    if cred.course == AP_CALC_BC:
+                                        subreq.clear_credits()
+                                        subreq.add_credit(cred.course, EIGHT_UNITS)
+                                    else:
+                                        subreq.add_credit(cred.course, FOUR_UNITS)
 
                             # Foreign Language exams count for 8 units
                             elif cred.course in MUIR_LANGUAGE_COURSES:
@@ -58,7 +86,6 @@ class MuirCollege(College):
                             elif cred.course == AP_LAT:
                                 # Clear out any previous language courses to reset the credited units
                                 subreq.clear_credits()
-
                                 subreq.add_credit(cred.course, TWELVE_UNITS)
 
                             # Standard subrequirement
