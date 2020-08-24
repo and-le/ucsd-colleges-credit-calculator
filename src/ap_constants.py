@@ -1,3 +1,10 @@
+# AP Scores
+AP_SCORE_1 = 1
+AP_SCORE_2 = 2
+AP_SCORE_3 = 3
+AP_SCORE_4 = 4
+AP_SCORE_5 = 5
+
 # AP Course Names
 
 # English
