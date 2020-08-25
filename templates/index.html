@@ -2,14 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>UCSD AP Credit Calculator</title>
+    <title>UCSD AP Credit Tool</title>
     <link rel="stylesheet" href="/static/css/style.css"/>
 </head>
 <body>
 
-<h1 class="header">UCSD AP Credit Calculator</h1>
+<h1 class="header">UCSD AP Credit Tool</h1>
 
-<h2 class="instructions">How to Use This Calculator</h2>
+<h2 class="instructions">How to Use This Tool</h2>
 
 <p id="instructions_paragraph">
     1. Select the AP courses that you have completed and/or plan to complete.
@@ -598,6 +598,8 @@
 
 <br>
 <br>
+<hr>
+<br>
 <br>
 
 <!-- 2nd Table of Results -->
@@ -651,7 +653,10 @@
 
 <br>
 <br>
+<hr>
 <br>
+<br>
+
 
 <!-- 3rd table -->
 <table id="warr_gen_table">
@@ -666,6 +671,16 @@
     <tr class="shaded_tr">
         <th>General unit total</th>
         <td class="numerical_td" id="warren_gen_unit_total_td"></td>
+    </tr>
+
+    <tr>
+        <th>Non-engineering major unit total</th>
+        <td class="numerical_td" id="warren_non_eng_unit_total_td"></td>
+    </tr>
+
+    <tr class="shaded_tr">
+        <th>Engineering major unit total</th>
+        <td class="numerical_td" id="warren_eng_unit_total_td"></td>
     </tr>
 
     <tr>
@@ -686,13 +701,13 @@
     <thead>
     <tr>
         <th>Category</th>
-        <th>Warren: Programs of Concentration (PofC)</th>
+        <th>Warren: Programs of Concentration (Non-engineering majors)</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>PofC unit total</th>
+        <th>Programs of Concentration unit total</th>
         <td class="numerical_td" id="warren_pofc_unit_total_td"></td>
     </tr>
 
@@ -747,13 +762,13 @@
     <thead>
     <tr>
         <th>Category</th>
-        <th>Warren: Area Studies (AS)</th>
+        <th>Warren: Area Studies (Engineering majors)</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>AS unit total</th>
+        <th>Area Studies unit total</th>
         <td class="numerical_td" id="warren_as_unit_total_td"></td>
     </tr>
 
@@ -783,7 +798,7 @@
 <br>
 <br>
 <hr>
-<p class="disclaimer">This calculator is based on the 2020-2021 academic year requirements, which can be found
+<p class="disclaimer">This tool is based on the 2020-2021 academic year requirements, which can be found
     <a href="https://www.ucsd.edu/catalog/pdf/APC-chart.pdf" target="_blank">here.</a>
 </p>
 
@@ -861,7 +876,9 @@
                         document.getElementById("sixth_rem_td").textContent = sixth.net_units;
 
                         document.getElementById("warren_gen_unit_total_td").textContent = warren.gen_unit_total;
-                        console.log(document.getElementById("warren_gen_ap_ul"));
+                        document.getElementById("warren_non_eng_unit_total_td").textContent = warren.gen_unit_total + warren.pofc_unit_total;
+                        document.getElementById("warren_eng_unit_total_td").textContent = warren.gen_unit_total + warren.as_unit_total;
+
                         displayCredits("warren_gen_ap_ul", warren.gen_applied_credits);
 
                         // PofC table

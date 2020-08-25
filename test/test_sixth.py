@@ -87,5 +87,26 @@ class SixthTestCase(unittest.TestCase):
         self.assertEqual(expected_credit_units, college.credited_units)
 
 
+    def test_calculus_score_below_requirement(self):
+        credits = [
+            APCredit(AP_CALC_AB, 2),
+        ]
+
+        college = init_college(SIXTH_NAME)
+        college.apply_credits(credits)
+        self.assertEqual(0, college.credited_units)
+
+
+    def test_calculus_score_meets_requirement(self):
+        credits = [
+            APCredit(AP_CALC_AB, 3),
+            APCredit(AP_CALC_BC, 3),
+        ]
+
+        college = init_college(SIXTH_NAME)
+        college.apply_credits(credits)
+        self.assertEqual(4, college.credited_units)
+
+
 if __name__ == '__main__':
     unittest.main()

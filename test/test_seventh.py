@@ -45,5 +45,32 @@ class SeventhTestCase(unittest.TestCase):
         self.assertEqual(expected_net_units, college.get_net_units())
 
 
+    def test_math_score_requirement(self):
+        college = init_college(SEVENTH_NAME)
+        credits = [
+            APCredit(AP_CALC_AB, 3),
+            APCredit(AP_CALC_BC, 3),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(0, college.credited_units)
+
+    def test_lang_score_below_requirement(self):
+        college = init_college(SEVENTH_NAME)
+        credits = [
+            APCredit(AP_CHIN, 3),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(4, college.credited_units)
+
+
+    def test_lang_score_meets_requirement(self):
+        college = init_college(SEVENTH_NAME)
+        credits = [
+            APCredit(AP_CHIN, 4),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(8, college.credited_units)
+
+
 if __name__ == '__main__':
     unittest.main()

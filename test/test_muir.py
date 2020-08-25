@@ -181,5 +181,41 @@ class MuirTestCase(unittest.TestCase):
         self.assertEqual(expected_credit_units, college.credited_units)
 
 
+    def test_econ_score_requirement(self):
+        college= init_college(MUIR_NAME)
+        credits = [
+            APCredit(AP_MACRO, 4),
+            APCredit(AP_MICRO, 4)
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(0, college.credited_units)
+
+    def test_gov_score_requirement(self):
+        college = init_college(MUIR_NAME)
+        credits = [
+            APCredit(AP_COMP_GOV, 4),
+            APCredit(AP_US_GOV, 4)
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(0, college.credited_units)
+
+    def test_psy_score_requirement(self):
+        college = init_college(MUIR_NAME)
+        credits = [
+            APCredit(AP_PSY, 3),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(0, college.credited_units)
+
+    def test_math_score_requirement(self):
+        college = init_college(MUIR_NAME)
+        credits = [
+            APCredit(AP_CALC_AB, 3),
+            APCredit(AP_CALC_BC, 5),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(8, college.credited_units)
+
+
 if __name__ == '__main__':
     unittest.main()

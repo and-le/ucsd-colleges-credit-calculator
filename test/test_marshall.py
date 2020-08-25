@@ -44,6 +44,15 @@ class MarshallTestCase(unittest.TestCase):
         expected_net_units = 36
         self.assertEqual(expected_net_units, college.get_net_units())
 
+    def test_math_score_requirement(self):
+        college = init_college(MARSHALL_NAME)
+        credits = [
+            APCredit(AP_CALC_AB, 3),
+            APCredit(AP_CALC_BC, 3),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(0, college.credited_units)
+
 
 if __name__ == '__main__':
     unittest.main()

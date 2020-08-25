@@ -2,10 +2,8 @@ import unittest
 
 from src.ap_constants import *
 from src.requirements import APCredit
-from src.init_college import init_college, WARREN_NAME, WARREN_MUS_AS_NAME, WARREN_PSY_AS_NAME, WARREN_ECON_POFC_NAME, \
-    WARREN_MUS_POFC_NAME, WARREN_PSY_POFC_NAME, WARREN_SCI_POFC_NAME, \
-    WARREN_VIS_ART_POFC_NAME, WARREN_HIST_POFC_NAME,  WARREN_LIT_POFC_NAME
-
+from src.init_college import *
+from src.warren import *
 
 class WarrenTestCase(unittest.TestCase):
     """
@@ -144,15 +142,33 @@ class WarrenTestCase(unittest.TestCase):
         soc_condition = (WARREN_PSY_AS_NAME == college.area_study_soc.name)
         self.assertTrue(hum_condition and soc_condition)
 
-
-    def test_unit_amounts(self):
+    def test_bio_below_requirement(self):
         college = init_college(WARREN_NAME)
         credits = [
-            APCredit(AP_MUS, 5),  # Humanities and Fine Arts - Music
-            APCredit(AP_PSY, 5),  # Social Sciences - Psychology
+            APCredit(AP_BIO, 3),
         ]
         college.apply_credits(credits)
-        self.assertEqual()
+        pofc = college.get_pofc(WARREN_BIO_NAME)
+        self.assertEqual(0, pofc.credit_units)
+
+    def test_chem_below_requirement(self):
+        college = init_college(WARREN_NAME)
+        credits = [
+            APCredit(AP_CHEM, 4),
+        ]
+        college.apply_credits(credits)
+        pofc = college.get_pofc(WARREN_CHEM_NAME)
+        self.assertEqual(0, pofc.credit_units)
+
+    def test_econ_below_requirement(self):
+        college = init_college(WARREN_NAME)
+        credits = [
+            APCredit(AP_MACRO, 4),
+            APCredit(AP_MICRO, 4),
+        ]
+        college.apply_credits(credits)
+        self.assertEqual(0, college.pofc_soc.credit_units)
+        self.assertEqual(0, college.area_study_soc.credit_units)
 
 
 if __name__ == '__main__':
