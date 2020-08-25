@@ -12,7 +12,7 @@
 <h2 class="instructions">How to Use This Tool</h2>
 
 <p id="instructions_paragraph">
-    1. Select the AP courses that you have completed and/or plan to complete.
+    1. Select the AP courses that you have completed and/or plan to complete, and enter your scores.
     <br>
     2. Click the "Calculate Credits" button.
     <br>
@@ -552,16 +552,16 @@
     <!-- Table headers -->
     <thead>
     <tr>
-        <th>Category</th>
-        <th>Marshall</th>
-        <th>Muir</th>
-        <th>Revelle</th>
+        <th>Summary</th>
+        <th>Marshall College</th>
+        <th>Muir College</th>
+        <th>Revelle College</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>Unit total</th>
+        <th>Number of required units</th>
         <td class="numerical_td" id="marshall_unit_total_td"></td>
         <td class="numerical_td" id="muir_unit_total_td"></td>
         <td class="numerical_td" id="revelle_unit_total_td"></td>
@@ -588,7 +588,7 @@
     </tr>
 
     <tr>
-        <th>Remaining units</th>
+        <th>Number of required units after applying credits</th>
         <td class="numerical_td" id="marshall_rem_td"></td>
         <td class="numerical_td" id="muir_rem_td"></td>
         <td class="numerical_td" id="revelle_rem_td"></td>
@@ -607,16 +607,16 @@
     <!-- Table headers -->
     <thead>
     <tr>
-        <th>Category</th>
-        <th>Roosevelt</th>
-        <th>Seventh</th>
-        <th>Sixth</th>
+        <th>Summary</th>
+        <th>Roosevelt College</th>
+        <th>Seventh College</th>
+        <th>Sixth College</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>Unit total</th>
+        <th>Number of required units</th>
         <td class="numerical_td" id="roosevelt_unit_total_td"></td>
         <td class="numerical_td" id="seventh_unit_total_td"></td>
         <td class="numerical_td" id="sixth_unit_total_td"></td>
@@ -643,7 +643,7 @@
     </tr>
 
     <tr>
-        <th>Remaining units</th>
+        <th>Number of required units after applying credits</th>
         <td class="numerical_td" id="roosevelt_rem_td"></td>
         <td class="numerical_td" id="seventh_rem_td"></td>
         <td class="numerical_td" id="sixth_rem_td"></td>
@@ -662,33 +662,35 @@
 <table id="warr_gen_table">
     <thead>
     <tr>
-        <th>Category</th>
-        <th>Warren</th>
+        <th>Summary</th>
+        <th>Warren College</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>General unit total</th>
+        <th>Number of general (non-PofC, non-AS) required units</th>
         <td class="numerical_td" id="warren_gen_unit_total_td"></td>
     </tr>
 
-    <tr>
-        <th>Non-engineering major unit total</th>
-        <td class="numerical_td" id="warren_non_eng_unit_total_td"></td>
-    </tr>
-
-    <tr class="shaded_tr">
-        <th>Engineering major unit total</th>
-        <td class="numerical_td" id="warren_eng_unit_total_td"></td>
-    </tr>
-
-    <tr>
-        <th>Credited AP courses</th>
+     <tr>
+        <th>Credited general (non-PofC, non-AS) AP courses</th>
         <td class="text_td" id="warren_gen_ap_td">
             <ul id="warren_gen_ap_ul"></ul>
         </td>
     </tr>
+
+    <tr class="shaded_tr">
+        <th>Number of PofC required units</th>
+        <td class="numerical_td" id="warren_non_eng_unit_total_td"></td>
+    </tr>
+
+    <tr>
+        <th>Number of AS required units</th>
+        <td class="numerical_td" id="warren_eng_unit_total_td"></td>
+    </tr>
+
+
     </tbody>
 </table>
 
@@ -700,14 +702,14 @@
 <table id="warr_pofc_table">
     <thead>
     <tr>
-        <th>Category</th>
-        <th>Warren: Programs of Concentration (Non-engineering majors)</th>
+        <th>Summary</th>
+        <th>Warren College Programs of Concentration (Non-engineering majors)</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>Programs of Concentration unit total</th>
+        <th>Number of units required for Programs of Concentration (General + PofC)</th>
         <td class="numerical_td" id="warren_pofc_unit_total_td"></td>
     </tr>
 
@@ -733,19 +735,19 @@
     </tr>
 
     <tr class="shaded_tr">
-        <th>Humanities and Fine Arts + Social Sciences: remaining units</th>
+        <th>Humanities and Fine Arts + Social Sciences: number of required units after applying credits</th>
         <td class="numerical_td" id="warren_pofc_rem_hum_soc">
         </td>
     </tr>
 
     <tr>
-        <th>Humanities and Fine Arts + Math, Natural Sciences, and Engineering: remaining units</th>
+        <th>Humanities and Fine Arts + Math, Natural Sciences, and Engineering: number of required units after applying credits</th>
         <td class="numerical_td" id="warren_pofc_rem_hum_sci">
         </td>
     </tr>
 
     <tr class="shaded_tr">
-        <th>Social Sciences + Math, Natural Sciences and Engineering: remaining units</th>
+        <th>Social Sciences + Math, Natural Sciences, and Engineering: number of required units after applying credits</th>
         <td class="numerical_td" id="warren_pofc_rem_soc_sci">
         </td>
     </tr>
@@ -761,14 +763,14 @@
 <table id="warr_as_table">
     <thead>
     <tr>
-        <th>Category</th>
-        <th>Warren: Area Studies (Engineering majors)</th>
+        <th>Summary</th>
+        <th>Warren College Area Studies (Engineering majors)</th>
     </tr>
     </thead>
 
     <tbody>
     <tr class="shaded_tr">
-        <th>Area Studies unit total</th>
+        <th>Number of units required for Area Studies (General + AS)</th>
         <td class="numerical_td" id="warren_as_unit_total_td"></td>
     </tr>
 
@@ -787,7 +789,7 @@
     </tr>
 
     <tr>
-        <th>Remaining units</th>
+        <th>Number of required units after applying credits</th>
         <td class="numerical_td" id="warren_as_rem_td"></td>
     </tr>
     </tbody>
@@ -805,7 +807,7 @@
 <p class="disclaimer">
     Disclaimer: This tool is accurate to the best of my knowledge. If you find any inaccuracies, please let me
     know at
-    <a href="mailto: a1le@ucsd.edu">a1le@ucsd.edu.</a>
+    <a href="mailto: a1le@ucsd.edu">a1le@ucsd.edu</a>
 </p>
 
 <p class="disclaimer">
@@ -863,12 +865,10 @@
                         document.getElementById("roosevelt_cr_td").textContent = roosevelt.credited_units;
                         document.getElementById("roosevelt_rem_td").textContent = roosevelt.net_units;
 
-
                         document.getElementById("seventh_unit_total_td").textContent = seventh.unit_total;
                         displayCredits("seventh_ap_ul", seventh.applied_credits);
                         document.getElementById("seventh_cr_td").textContent = seventh.credited_units;
                         document.getElementById("seventh_rem_td").textContent = seventh.net_units;
-
 
                         document.getElementById("sixth_unit_total_td").textContent = sixth.unit_total;
                         displayCredits("sixth_ap_ul", sixth.applied_credits);
@@ -876,13 +876,13 @@
                         document.getElementById("sixth_rem_td").textContent = sixth.net_units;
 
                         document.getElementById("warren_gen_unit_total_td").textContent = warren.gen_unit_total;
-                        document.getElementById("warren_non_eng_unit_total_td").textContent = warren.gen_unit_total + warren.pofc_unit_total;
-                        document.getElementById("warren_eng_unit_total_td").textContent = warren.gen_unit_total + warren.as_unit_total;
+                        document.getElementById("warren_non_eng_unit_total_td").textContent = warren.pofc_unit_total;
+                        document.getElementById("warren_eng_unit_total_td").textContent = warren.as_unit_total;
 
                         displayCredits("warren_gen_ap_ul", warren.gen_applied_credits);
 
                         // PofC table
-                        document.getElementById("warren_pofc_unit_total_td").textContent = warren.pofc_unit_total;
+                        document.getElementById("warren_pofc_unit_total_td").textContent = warren.gen_unit_total + warren.pofc_unit_total;
                         displayCredits("warren_pofc_hum_ap_ul", warren.pofc_hum_applied_credits);
                         displayCredits("warren_pofc_soc_ap_ul", warren.pofc_soc_applied_credits);
                         displayCredits("warren_pofc_sci_ap_ul", warren.pofc_sci_applied_credits);
@@ -891,7 +891,7 @@
                         document.getElementById("warren_pofc_rem_soc_sci").textContent = warren.pofc_soc_sci_net_units;
 
                         // AS table
-                        document.getElementById("warren_as_unit_total_td").textContent = warren.as_unit_total;
+                        document.getElementById("warren_as_unit_total_td").textContent = warren.gen_unit_total + warren.as_unit_total;
                         displayCredits("warren_as_hum_ul", warren.as_hum_applied_credits);
                         displayCredits("warren_as_soc_ul", warren.as_soc_applied_credits);
                         document.getElementById("warren_as_rem_td").textContent = warren.as_hum_soc_net_units;
